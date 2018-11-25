@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datos="clr-namespace:ProyectoXamarin.ViewModel"
+             xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
+             x:Class="ProyectoXamarin.ListarAutores">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <datos:DatosAutores x:Key="datosAutores"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="12, 0, 0, 0">
+            <Label
+                Text="Autores"
+                FontAttributes="Bold"
+                FontSize="Large"/>
+
+            <ScrollView>
+                <ListView ItemsSource="{Binding Autores, Source={StaticResource datosAutores}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="modelo:Autor">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" 
+                                             Margin="12, 12, 0, 12">
+                                    <Image Source="Assets/neeko.jpeg" 
+                                           HeightRequest="80" 
+                                           WidthRequest="80"/>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Nombre}"/>
+                                        <Label Text="{Binding Apellidos}"/>
+                                        <Label Text="{Binding Nacimiento}"/>
+                                        <Label Text="{Binding Telefono}"/>
+                                        <Label Text="{Binding Sexo}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>
