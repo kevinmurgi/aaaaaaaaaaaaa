@@ -11,13 +11,6 @@ namespace ProyectoXamarin
         public App()
         {
             InitializeComponent();
-            
-            MainPage = new ListarAutores();
-        }
-
-        protected override void OnStart()
-        {
-            // Handle when your app starts
             DataAccess.InitializeDatabase();
 
             /*
@@ -33,6 +26,13 @@ namespace ProyectoXamarin
             DataAccess.AddLibro("Harry Potter", "Joanne", "26/06/1997", 255, "Fantasia");
             DataAccess.AddLibro("El Hobbit", "John", "21/09/1937", 288, "Fantasia");
             */
+
+            MainPage = new AltaAutores();
+        }
+
+        protected override void OnStart()
+        {
+            // Handle when your app starts 
         }
 
         protected override void OnSleep()

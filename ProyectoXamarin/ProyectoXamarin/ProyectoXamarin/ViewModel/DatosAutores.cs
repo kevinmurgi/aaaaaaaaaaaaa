@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using ProyectoXamarin.DataModel;
 
 namespace ProyectoXamarin.ViewModel
 {
-    public class DatosAutores
+    public class DatosAutores : INotifyPropertyChanged
     {
-        // Hacemos Singleton para que solo se acceda 1 vez a la base de datos
-        private static DatosAutores _datos = new DatosAutores();
-        public static DatosAutores Datos
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
         {
-            get
+            PropertyChangedEventHandler handler = PropertyChanged;
+
+            if (handler != null)
             {
-                return _datos;
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
         // Atributos
         private static ObservableCollection<Autor> _autores = DataAccess.GetAutores();
+
         public ObservableCollection<Autor> Autores
         {
             get
@@ -29,6 +32,7 @@ namespace ProyectoXamarin.ViewModel
             set
             {
                 _autores = value;
+                OnPropertyChanged("Autores");
             }
         }
 
