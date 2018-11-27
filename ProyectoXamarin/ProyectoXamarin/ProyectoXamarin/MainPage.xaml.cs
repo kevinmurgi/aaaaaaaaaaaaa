@@ -4,14 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using ProyectoXamarin.DataModel;
 
 namespace ProyectoXamarin
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : MasterDetailPage
     {
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = (ItemNavegacion)e.SelectedItem;
+            Type page = item.TargetType;
+            Detail = new NavigationPage((Page)Activator.CreateInstance(page));
+            IsPresented = false;
         }
     }
 }

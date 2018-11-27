@@ -1,14 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProyectoXamarin"
+             xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu">
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <modelo:ItemsMenu x:Key="listaItems"/>
+                </ResourceDictionary>
+            </ContentPage.Resources>
 
-</ContentPage>
+            <ListView ItemsSource="{Binding Items, Source={StaticResource listaItems}}"
+                      SeparatorVisibility="Default"
+                      ItemSelected="ListView_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="modelo:ItemNavegacion">
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" 
+                                         VerticalOptions="FillAndExpand">
+                                <Image Source="{Binding Icono}"
+                                       WidthRequest="40"
+                                       HeightRequest="40"
+                                       VerticalOptions="Start"/>
+                                <Label Text="{Binding Titulo}"
+                                       FontSize="Small"
+                                       VerticalOptions="End"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

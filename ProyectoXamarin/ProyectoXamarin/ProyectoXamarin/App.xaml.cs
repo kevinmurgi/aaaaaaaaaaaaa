@@ -27,7 +27,7 @@ namespace ProyectoXamarin
             DataAccess.AddLibro("El Hobbit", "John", "21/09/1937", 288, "Fantasia");
             */
 
-            MainPage = new AltaAutores();
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
