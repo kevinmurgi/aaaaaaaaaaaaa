@@ -1,12 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProyectoXamarin.ViewModel"
              x:Class="ProyectoXamarin.AltaLibros">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AltaLibrosViewModel x:Key="vmAltaLibro"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" 
+                     Margin="12, 0, 12, 0"
+                     BindingContext="{StaticResource vmAltaLibro}">
+
+            <!-- Titulo de la pagina -->
+            <Label Text="Nuevo Libro"
+                    FontAttributes="Bold"
+                    FontSize="Large"/>
+
+            <!-- Formulario -->
+            <Label Text="Nombre:"/>
+            <Entry Placeholder="nombre"
+                   MaxLength="30"
+                   Text="{Binding Nombre, Mode=TwoWay}"/>
+
+            <Label Text="Autor:"/>
+            <Picker x:Name="autoresPicker" 
+                    SelectedItem="{Binding NomAutor, Mode=TwoWay}"/>
+
+            <Label Text="Lanzamiento:"/>
+            <DatePicker HorizontalOptions="Start" 
+                        Date="{Binding Lanzamiento, Mode=TwoWay}"/>
+
+            <Label Text="Paginas:"/>
+            <Entry Placeholder="paginas"
+                   Text="{Binding Paginas, Mode=TwoWay}"/>
+
+            <!--Genero checkbox-->
+            <Label Text="Genero:"/>
+
+            <!-- Botones -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Enviar"
+                        Command="{Binding comandoAlta}"/>
+                <Button Text="Borrar"
+                        Command="{Binding comandoBorrado}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

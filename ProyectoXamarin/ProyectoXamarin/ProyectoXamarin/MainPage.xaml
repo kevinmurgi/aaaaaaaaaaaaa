@@ -3,37 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:ProyectoXamarin"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
-             x:Class="ProyectoXamarin.MainPage">
+             x:Class="ProyectoXamarin.MainPage"
+             MasterBehavior="Popover">
+    <!-- El MasterBehavior es para que el menu se oculte y no quede fijo -->
 
     <MasterDetailPage.Master>
-        <ContentPage Title="Menu">
+        <ContentPage Title="Autores-Libros">
+
+            <!-- Crea una instancia de ItemsMenu para tener la lista con todos los Items de que debe tener el menu de la app -->
             <ContentPage.Resources>
                 <ResourceDictionary>
                     <modelo:ItemsMenu x:Key="listaItems"/>
                 </ResourceDictionary>
             </ContentPage.Resources>
-
-            <ListView ItemsSource="{Binding Items, Source={StaticResource listaItems}}"
-                      SeparatorVisibility="Default"
-                      ItemSelected="ListView_ItemSelected">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="modelo:ItemNavegacion">
-                        <ViewCell>
-                            <StackLayout Orientation="Horizontal" 
-                                         VerticalOptions="FillAndExpand">
-                                <Image Source="{Binding Icono}"
-                                       WidthRequest="40"
-                                       HeightRequest="40"
-                                       VerticalOptions="Start"/>
-                                <Label Text="{Binding Titulo}"
-                                       FontSize="Small"
-                                       VerticalOptions="End"/>
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
             
+            <StackLayout Orientation="Vertical" 
+                         BindingContext="{StaticResource listaItems}">
+
+                <!-- Lista con todos los items del menu, con su icono y su titulo -->
+                <ListView ItemsSource="{Binding Items ,Source={StaticResource listaItems}}"
+                          SeparatorVisibility="Default"
+                          ItemSelected="ListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="modelo:ItemNavegacion">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" 
+                                             VerticalOptions="FillAndExpand"
+                                             Margin="8">
+                                    <Image Source="{Binding Icono}"
+                                           WidthRequest="50"
+                                           HeightRequest="50"
+                                           VerticalOptions="Start"/>
+                                    <Label Text="{Binding Titulo}"
+                                           FontSize="Small"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
 

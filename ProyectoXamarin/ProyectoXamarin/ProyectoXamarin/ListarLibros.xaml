@@ -5,6 +5,7 @@
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.ListarLibros">
 
+    <!-- Crea una instancia de DatosLibros para tener la lista con todos los Libros de la BBDD -->
     <ContentPage.Resources>
         <ResourceDictionary>
             <datos:DatosLibros x:Key="datosLibros"/>
@@ -12,6 +13,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
+        <!-- Titulo de la pagina -->
         <StackLayout Orientation="Vertical" Margin="12, 0, 0, 0">
             <Label
                 Text="Libros"
@@ -19,17 +21,19 @@
                 FontSize="Large"/>
 
             <ScrollView>
+                <!-- Lista con los objetos Libro de la instancia anteriormente creada (y ahora bindeada) -->
                 <ListView ItemsSource="{Binding Libros, Source={StaticResource datosLibros}}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Libro">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" 
                                                  Margin="12, 12, 0, 12">
+                                    <!-- La imagen tiene una ruta diferente dependiendo de donde se ejecuta la app -->
                                     <Image HeightRequest="80" 
                                                WidthRequest="80">
                                         <Image.Source>
                                             <OnPlatform x:TypeArguments="ImageSource">
-                                                <On Platform="UWP" Value="Assets/neeko.jpeg" />
+                                                <On Platform="UWP" Value="Assets/pokachu.png" />
                                                 <On Platform="Android" Value="" />
                                                 <On Platform="iOS" Value="" />
                                             </OnPlatform>

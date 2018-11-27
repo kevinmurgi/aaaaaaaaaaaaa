@@ -1,32 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ProyectoXamarin.ViewModel"
              x:Class="ProyectoXamarin.AltaAutores">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <vm:AltaAutoresViewModel x:Key="vmAltaAutor"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" Margin="12, 0, 0, 0">
-            <Label
-                Text="Nuevo Autor"
-                FontAttributes="Bold"
-                FontSize="Large"/>
-            
+
+        <StackLayout Orientation="Vertical" 
+                     Margin="12, 0, 12, 0"
+                     BindingContext="{StaticResource vmAltaAutor}">
+
+            <!-- Titulo de la pagina -->
+            <Label Text="Nuevo Autor"
+                    FontAttributes="Bold"
+                    FontSize="Large"/>
+
+            <!-- Formulario -->
             <Label Text="Nombre:"/>
             <Entry Placeholder="nombre" 
-                   MaxLength="20"/>
-            
+                   MaxLength="20"
+                   Text="{Binding Nombre, Mode=TwoWay}"/>
+
             <Label Text="Apellidos:"/>
             <Entry Placeholder="apellidos" 
-                   MaxLength="40"/>
-            
+                   MaxLength="40"
+                   Text="{Binding Apellidos, Mode=TwoWay}"/>
+
             <Label Text="Nacimiento:"/>
-            <Entry Placeholder="nacimiento"/>
-            
+            <DatePicker HorizontalOptions="Start"
+                        Date="{Binding Nacimiento, Mode=TwoWay}"/>
+
             <Label Text="Telefono:"/>
             <Entry Placeholder="telefono" 
-                   MaxLength="12"/>
+                   MaxLength="12"
+                   Text="{Binding Telefono, Mode=TwoWay}"/>
             
-            <Label Text="Sexo:"/>
-            <Entry Placeholder="sexo" 
-                   MaxLength="10"/>
+            <!-- Radio button -->
+            <Picker Title="Sexo:" 
+                    SelectedItem="{Binding Sexo, Mode=TwoWay}">
+                <Picker.Items>
+                    <x:String>Seleccionar...</x:String>
+                    <x:String>Masculino</x:String>
+                    <x:String>Femenino</x:String>
+                    <x:String>Otro</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <!-- Botones -->
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Enviar"
+                        Command="{Binding comandoAlta}"/>
+                <Button Text="Borrar"
+                        Command="{Binding comandoBorrado}"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
+    
 </ContentPage>

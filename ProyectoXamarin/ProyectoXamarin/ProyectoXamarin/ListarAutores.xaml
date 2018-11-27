@@ -5,6 +5,7 @@
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.ListarAutores">
 
+    <!-- Crea una instancia de DatosAutores para tener la lista con todos los Autores de la BBDD -->
     <ContentPage.Resources>
         <ResourceDictionary>
             <datos:DatosAutores x:Key="datosAutores"/>
@@ -12,6 +13,7 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
+        <!-- Titulo de la pagina -->
         <StackLayout Orientation="Vertical" Margin="12, 0, 0, 0">
             <Label
                 Text="Autores"
@@ -19,12 +21,14 @@
                 FontSize="Large"/>
 
             <ScrollView>
+                <!-- Lista con los objetos Autor de la instancia anteriormente creada (y ahora bindeada) -->
                 <ListView ItemsSource="{Binding Autores, Source={StaticResource datosAutores}}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Autor">
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal" 
                                              Margin="12, 12, 0, 12">
+                                    <!-- La imagen tiene una ruta diferente dependiendo de donde se ejecuta la app -->
                                     <Image HeightRequest="80" 
                                            WidthRequest="80">
                                         <Image.Source>

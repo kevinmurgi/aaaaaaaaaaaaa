@@ -13,6 +13,7 @@ namespace ProyectoXamarin
             InitializeComponent();
             DataAccess.InitializeDatabase();
 
+            // Datos de prueba para verlos en la App, solo deben lanzarse 1 vez
             /*
             DataAccess.AddAutor("Brandon", "Sanderson", "19/12/1975", "Desconocido", "Masculino");
             DataAccess.AddAutor("Patrick", "Rothfuss", "06/06/1973", "Desconocido", "Masculino");
@@ -21,13 +22,13 @@ namespace ProyectoXamarin
             DataAccess.AddAutor("John", "Tolkien", "03/01/1892", "Desconocido", "Masculino");
 
             DataAccess.AddLibro("Mistborn", "Brandon", "04/12/2016", 541, "Alta Fantasia");
-            DataAccess.AddLibro("Nombre del Viento", "Daniel7", "27/03/2007", 800, "Fantasia");
+            DataAccess.AddLibro("Nombre del Viento", "Patrick", "27/03/2007", 800, "Fantasia");
             DataAccess.AddLibro("Libro", "Daniel", "14/03/2014", 9999, "CCFF");
             DataAccess.AddLibro("Harry Potter", "Joanne", "26/06/1997", 255, "Fantasia");
             DataAccess.AddLibro("El Hobbit", "John", "21/09/1937", 288, "Fantasia");
             */
 
-            MainPage = new MainPage();
+            MainPage = new ProyectoXamarin.MainPage();
         }
 
         protected override void OnStart()

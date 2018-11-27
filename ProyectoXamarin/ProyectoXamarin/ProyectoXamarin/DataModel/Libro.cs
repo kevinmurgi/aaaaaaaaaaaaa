@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
+/*
+ * Clase Libro que solamente define la estructura de los objetos de tipo Libro
+ * Implementa INotifyPropertyChanged
+ */
 namespace ProyectoXamarin.DataModel
 {
     public class Libro : INotifyPropertyChanged
     {
+        // Evento y metodo para el PropertyChaged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -18,7 +23,7 @@ namespace ProyectoXamarin.DataModel
             }
         }
 
-        // Atributos
+        // Atributos de la clase
         private string _nombre;
         public string Nombre
         {

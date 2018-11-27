@@ -5,6 +5,9 @@ using System.Text;
 using ProyectoXamarin.DataModel;
 using System.Collections.ObjectModel;
 
+/*
+ * Clase DataAccess que implementa un serie de métodos para poder trabajar con la BBDD SQLite
+ */
 namespace ProyectoXamarin.ViewModel
 {
     public static class DataAccess
@@ -129,7 +132,7 @@ namespace ProyectoXamarin.ViewModel
                 db.Open();
 
                 SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from Autores", db);
+                    ("SELECT * from Autores order by nombre_autor", db);
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 
@@ -150,6 +153,31 @@ namespace ProyectoXamarin.ViewModel
             return autores;
         }
 
+        // Metodo que devuelve todos los nombres de autores almacenados en la base de datos con una variable List<>
+        public static ObservableCollection<string> GetNombreAutores()
+        {
+            ObservableCollection<string> nomAutores = new ObservableCollection<string>();
+
+            using (SqliteConnection db =
+                new SqliteConnection("Filename=sqliteSample.db"))
+            {
+                db.Open();
+
+                SqliteCommand selectCommand = new SqliteCommand
+                    ("SELECT nombre_autor from Autores", db);
+
+                SqliteDataReader query = selectCommand.ExecuteReader();
+
+                while (query.Read())
+                {
+                    nomAutores.Add(query.GetString(0));
+                }
+                db.Close();
+            }
+
+            return nomAutores;
+        }
+
         // Metodo que devuelve todos los libros almacenados en la base de datos con una variable List<>
         public static ObservableCollection<Libro> GetLibros()
         {
@@ -161,7 +189,7 @@ namespace ProyectoXamarin.ViewModel
                 db.Open();
 
                 SqliteCommand selectCommand = new SqliteCommand
-                    ("SELECT * from Libros", db);
+                    ("SELECT * from Libros order by nombre_libro", db);
 
                 SqliteDataReader query = selectCommand.ExecuteReader();
 

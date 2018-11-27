@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using ProyectoXamarin;
 
+/*
+ * Clase ItemNavegacion que solamente define la estructura que va a tener cada objeto del menu de la aplicación.
+ */
 namespace ProyectoXamarin.DataModel
 {
     public class ItemNavegacion
     {
+        // Constructor
         public ItemNavegacion() { }
-        public ItemNavegacion(string titulo, string icono, Type target)
-        {
-            this.Titulo = titulo;
-            this.Icono = icono;
-            this.TargetType = target;
-        }
+
+        // Atributos de la clase
         public string Titulo { get; set; }
         public string Icono { get; set; }
         public Type TargetType { get; set; }

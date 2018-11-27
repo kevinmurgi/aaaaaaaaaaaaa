@@ -13,8 +13,12 @@ namespace ProyectoXamarin
         public MainPage()
         {
             InitializeComponent();
+
+            // Primera pagina que se cargara cuando se ejecute la aplicacion
+            Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(ListarAutores)));
         }
 
+        // Metodo que carga la pagina al seleccionar un item de la viewlist (proximamente sera un comando)
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             var item = (ItemNavegacion)e.SelectedItem;

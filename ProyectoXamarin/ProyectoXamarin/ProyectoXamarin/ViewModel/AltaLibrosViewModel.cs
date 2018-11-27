@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
 using ProyectoXamarin.ViewModel;
 using ProyectoXamarin.DataModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace ProyectoXamarin.ViewModel
 {
-    public class AltaAutoresViewModel : INotifyPropertyChanged
+    public class AltaLibrosViewModel : INotifyPropertyChanged
     {
         // Evento y metodo de PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -29,86 +29,85 @@ namespace ProyectoXamarin.ViewModel
         {
             get
             {
-                return this._nombre;
+                return _nombre;
             }
             set
             {
-                if (!value.Equals(this._nombre))
+                if (!value.Equals(_nombre))
                 {
-                    this._nombre = value;
+                    _nombre = value;
                     OnPropertyChanged("Nombre");
                     RefreshCanExecutes();
                 }
             }
         }
 
-        private string _apellidos = "";
-        public string Apellidos
+        private string _nomAutor;
+        public string NomAutor
         {
             get
             {
-                return this._apellidos;
+                return _nomAutor;
             }
             set
             {
-                if (!value.Equals(this._apellidos))
+                if (!value.Equals(_nomAutor))
                 {
-                    this._apellidos = value;
-                    OnPropertyChanged("Apellidos");
+                    _nomAutor = value;
+                    OnPropertyChanged("NomAutor");
                     RefreshCanExecutes();
                 }
             }
         }
-        
-        private string _nacimiento = "2000/01/01";
-        public string Nacimiento
+
+        private string _lanzamiento = "2000/01/01";
+        public string Lanzamiento
         {
             get
             {
-                return this._nacimiento;
+                return _lanzamiento;
             }
             set
             {
-                if (!value.Equals(this._nacimiento))
+                if (!value.Equals(_lanzamiento))
                 {
-                    this._nacimiento = value;
-                    OnPropertyChanged("Nacimiento");
+                    _lanzamiento = value;
+                    OnPropertyChanged("Lanzamiento");
                 }
             }
         }
-        
-        private string _telefono = "";
-        public string Telefono
+
+        private string _paginas = "0";
+        public string Paginas
         {
             get
             {
-                return this._telefono;
+                return _paginas;
             }
             set
             {
-                if (!value.Equals(this._telefono))
+                if (!value.Equals(_paginas))
                 {
-                    this._telefono = value;
-                    OnPropertyChanged("Telefono");
+                    _paginas = value;
+                    OnPropertyChanged("Paginas");
                     RefreshCanExecutes();
                 }
             }
         }
-        
-        private string _sexo = "Seleccionar...";
-        public string Sexo
+
+        private string _genero;
+        public string Genero
         {
             get
             {
-                return this._sexo;
+                return _genero;
             }
             set
             {
-                if (!value.Equals(this._sexo))
+                if (!value.Equals(_genero))
                 {
-                    this._sexo = value;
-                    OnPropertyChanged("Sexo");
-                    RefreshCanExecutes();
+                    _genero = value;
+                    OnPropertyChanged("Genero");
                 }
             }
         }
@@ -117,10 +116,10 @@ namespace ProyectoXamarin.ViewModel
         void limpiarCampos()
         {
             this.Nombre = "";
-            this.Apellidos = "";
-            this.Nacimiento = "2000/01/01";
-            this.Telefono = "";
-            this.Sexo = "Seleccionar...";
+            //this.NomAutor = "Seleccionar...";
+            this.Lanzamiento = "2000/01/01";
+            this.Paginas = "0";
+            this.Genero = "Seleccionar...";
         }
         void RefreshCanExecutes()
         {
@@ -133,24 +132,27 @@ namespace ProyectoXamarin.ViewModel
         public ICommand comandoBorrado { private set; get; }
 
         // Constructores
-        public AltaAutoresViewModel()
+        public AltaLibrosViewModel()
         {
             comandoAlta = new Command(
             execute: () =>
             {
-                DataAccess.AddAutor(Nombre, Apellidos, Nacimiento.Substring(0, 10), Telefono, Sexo);
+                string autorAux = "Sin Autor";
+                if (NomAutor != null)
+                {
+                    autorAux = NomAutor;
+                }
+                DataAccess.AddLibro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), "No hay genero");
                 limpiarCampos();
                 RefreshCanExecutes();
             },
             canExecute: () =>
             {
                 return !Nombre.Equals("") &&
-                        !Apellidos.Equals("") &&
-                        !Telefono.Equals("") &&
-                        !Sexo.Equals("Seleccionar...");
+                        Paginas != "0";
             }
             );
-            
+
             comandoBorrado = new Command(
             execute: () =>
             {
@@ -160,9 +162,7 @@ namespace ProyectoXamarin.ViewModel
             canExecute: () =>
             {
                 return !Nombre.Equals("") ||
-                        !Apellidos.Equals("") ||
-                        !Telefono.Equals("") ||
-                        !Sexo.Equals("Seleccionar...");
+                        Paginas != "0";
             }
             );
         }
