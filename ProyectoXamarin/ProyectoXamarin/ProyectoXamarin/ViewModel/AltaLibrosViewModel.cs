@@ -95,19 +95,101 @@ namespace ProyectoXamarin.ViewModel
             }
         }
 
-        private string _genero;
-        public string Genero
+        // Generos
+        private string _generos { get; set; }
+        private Boolean _aventura;
+        public Boolean Aventura
         {
             get
             {
-                return _genero;
+                return _aventura;
             }
             set
             {
-                if (!value.Equals(_genero))
+                if (!value.Equals(_aventura))
                 {
-                    _genero = value;
-                    OnPropertyChanged("Genero");
+                    _aventura = value;
+                    OnPropertyChanged("Aventura");
+                }
+            }
+        }
+        private Boolean _ccff;
+        public Boolean CCFF
+        {
+            get
+            {
+                return _ccff;
+            }
+            set
+            {
+                if (!value.Equals(_ccff))
+                {
+                    _ccff = value;
+                    OnPropertyChanged("CCFF");
+                }
+            }
+        }
+        private Boolean _fantasia;
+        public Boolean Fantasia
+        {
+            get
+            {
+                return _fantasia;
+            }
+            set
+            {
+                if (!value.Equals(_fantasia))
+                {
+                    _fantasia = value;
+                    OnPropertyChanged("Fantasia");
+                }
+            }
+        }
+        private Boolean _paranormal;
+        public Boolean Paranormal
+        {
+            get
+            {
+                return _paranormal;
+            }
+            set
+            {
+                if (!value.Equals(_paranormal))
+                {
+                    _paranormal = value;
+                    OnPropertyChanged("Paranormal");
+                }
+            }
+        }
+        private Boolean _romance;
+        public Boolean Romance
+        {
+            get
+            {
+                return _romance;
+            }
+            set
+            {
+                if (!value.Equals(_romance))
+                {
+                    _romance = value;
+                    OnPropertyChanged("Romance");
+                }
+            }
+        }
+        private Boolean _comedia;
+        public Boolean Comedia
+        {
+            get
+            {
+                return _comedia;
+            }
+            set
+            {
+                if (!value.Equals(_comedia))
+                {
+                    _comedia = value;
+                    OnPropertyChanged("Comedia");
                 }
             }
         }
@@ -119,12 +201,49 @@ namespace ProyectoXamarin.ViewModel
             //this.NomAutor = "Seleccionar...";
             this.Lanzamiento = "2000/01/01";
             this.Paginas = "0";
-            this.Genero = "Seleccionar...";
+            this.Aventura = false;
+            this.CCFF = false;
+            this.Fantasia = false;
+            this.Paranormal = false;
+            this.Romance = false;
+            this.Comedia = false;
         }
         void RefreshCanExecutes()
         {
             ((Command)comandoAlta).ChangeCanExecute();
             ((Command)comandoBorrado).ChangeCanExecute();
+        }
+        void comprobarGeneros()
+        {
+            _generos = "";
+            if (_aventura)
+            {
+                _generos += "Aventura, ";
+            }
+            if (_ccff)
+            {
+                _generos += "Ciencia Ficción, ";
+            }
+            if (_fantasia)
+            {
+                _generos += "Fantasía, ";
+            }
+            if (_paranormal)
+            {
+                _generos += "Paranormal, ";
+            }
+            if (_romance)
+            {
+                _generos += "Romance, ";
+            }
+            if (_comedia)
+            {
+                _generos += "Comedia, ";
+            }
+            if (_generos.Length > 2)
+            {
+                _generos = _generos.Substring(0, (_generos.Length - 2));
+            }
         }
 
         // Comandos
@@ -142,7 +261,8 @@ namespace ProyectoXamarin.ViewModel
                 {
                     autorAux = NomAutor;
                 }
-                DataAccess.AddLibro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), "No hay genero");
+                comprobarGeneros();
+                DataAccess.AddLibro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), _generos);
                 limpiarCampos();
                 RefreshCanExecutes();
             },

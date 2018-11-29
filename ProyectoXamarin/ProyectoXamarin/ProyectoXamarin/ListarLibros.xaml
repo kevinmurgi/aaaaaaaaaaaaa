@@ -40,7 +40,9 @@
                                         </Image.Source>
                                     </Image>
                                     <StackLayout Orientation="Vertical">
-                                        <Label Text="{Binding Nombre}"/>
+                                        <Label Text="{Binding Nombre}"
+                                               FontAttributes="Bold"
+                                               FontSize="Small"/>
                                         <Label Text="{Binding AutorLibro}"/>
                                         <Label Text="{Binding Lanzamiento}"/>
                                         <StackLayout Orientation="Horizontal">

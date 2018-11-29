@@ -40,8 +40,11 @@
                                         </Image.Source>
                                     </Image>
                                     <StackLayout Orientation="Vertical">
-                                        <Label Text="{Binding Nombre}"/>
-                                        <Label Text="{Binding Apellidos}"/>
+                                        <Label Text="{Binding Nombre}"
+                                               FontSize="Small"
+                                               FontAttributes="Bold"/>
+                                        <Label Text="{Binding Apellidos}"
+                                               FontAttributes="Bold"/>
                                         <Label Text="{Binding Nacimiento}"/>
                                         <Label Text="{Binding Telefono}"/>
                                         <Label Text="{Binding Sexo}"/>

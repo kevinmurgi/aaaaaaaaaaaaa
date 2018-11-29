@@ -31,8 +31,8 @@
                                              VerticalOptions="FillAndExpand"
                                              Margin="8">
                                     <Image Source="{Binding Icono}"
-                                           WidthRequest="50"
-                                           HeightRequest="50"
+                                           WidthRequest="40"
+                                           HeightRequest="40"
                                            VerticalOptions="Start"/>
                                     <Label Text="{Binding Titulo}"
                                            FontSize="Small"

@@ -7,6 +7,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <vm:AltaLibrosViewModel x:Key="vmAltaLibro"/>
+            <Style TargetType="Switch">
+                <Setter Property="Margin" Value="0, 0, 12, 0"/>
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -40,6 +46,37 @@
 
             <!--Genero checkbox-->
             <Label Text="Genero:"/>
+            <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding Aventura}"/>
+                        <Label Text="Aventura"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding CCFF}"/>
+                        <Label Text="Ciencia Ficción"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding Fantasia}"/>
+                        <Label Text="Fantasía"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Margin="24, 0, 0, 0">
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding Paranormal}"/>
+                        <Label Text="Paranormal"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding Romance}"/>
+                        <Label Text="Romance"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Switch IsToggled="{Binding Comedia}"/>
+                        <Label Text="Comedia"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            
 
             <!-- Botones -->
             <StackLayout Orientation="Horizontal">
