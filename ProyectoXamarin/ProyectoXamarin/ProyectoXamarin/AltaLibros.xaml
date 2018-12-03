@@ -17,31 +17,32 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" 
-                     Margin="12, 0, 12, 0"
+        <StackLayout Style="{StaticResource layoutPrincipal}"
                      BindingContext="{StaticResource vmAltaLibro}">
 
             <!-- Titulo de la pagina -->
             <Label Text="Nuevo Libro"
-                    FontAttributes="Bold"
-                    FontSize="Large"/>
+                    Style="{StaticResource tituloPagina}"/>
 
             <!-- Formulario -->
-            <Label Text="Nombre:"/>
+            <Label Text="*Nombre:"/>
             <Entry Placeholder="nombre"
                    MaxLength="30"
+                   Style="{StaticResource formatoFormulario}"
                    Text="{Binding Nombre, Mode=TwoWay}"/>
 
             <Label Text="Autor:"/>
             <Picker x:Name="autoresPicker" 
+                    Style="{StaticResource formatoFormularioPicker}"
                     SelectedItem="{Binding NomAutor, Mode=TwoWay}"/>
 
             <Label Text="Lanzamiento:"/>
             <DatePicker HorizontalOptions="Start" 
                         Date="{Binding Lanzamiento, Mode=TwoWay}"/>
 
-            <Label Text="Paginas:"/>
+            <Label Text="*Paginas:"/>
             <Entry Placeholder="paginas"
+                   Style="{StaticResource formatoFormulario}"
                    Text="{Binding Paginas, Mode=TwoWay}"/>
 
             <!--Genero checkbox-->
@@ -79,7 +80,7 @@
             
 
             <!-- Botones -->
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
                 <Button Text="Enviar"
                         Command="{Binding comandoAlta}"/>
                 <Button Text="Borrar"

@@ -13,12 +13,11 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <!-- Titulo de la pagina -->
-        <StackLayout Orientation="Vertical" Margin="12, 0, 0, 0">
+        <StackLayout Style="{StaticResource layoutPrincipal}">
+            <!-- Titulo de la pagina -->
             <Label
                 Text="Libros"
-                FontAttributes="Bold"
-                FontSize="Large"/>
+                Style="{StaticResource tituloPagina}"/>
 
             <ScrollView>
                 <!-- Lista con los objetos Libro de la instancia anteriormente creada (y ahora bindeada) -->

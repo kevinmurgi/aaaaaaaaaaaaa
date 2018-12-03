@@ -12,38 +12,40 @@
     
     <ContentPage.Content>
 
-        <StackLayout Orientation="Vertical" 
-                     Margin="12, 0, 12, 0"
+        <StackLayout Style="{StaticResource layoutPrincipal}"
                      BindingContext="{StaticResource vmAltaAutor}">
 
             <!-- Titulo de la pagina -->
             <Label Text="Nuevo Autor"
-                    FontAttributes="Bold"
-                    FontSize="Large"/>
+                    Style="{StaticResource tituloPagina}"/>
 
             <!-- Formulario -->
-            <Label Text="Nombre:"/>
+            <Label Text="*Nombre:"/>
             <Entry Placeholder="nombre" 
                    MaxLength="20"
+                   Style="{StaticResource formatoFormulario}"
                    Text="{Binding Nombre, Mode=TwoWay}"/>
 
-            <Label Text="Apellidos:"/>
+            <Label Text="*Apellidos:"/>
             <Entry Placeholder="apellidos" 
                    MaxLength="40"
+                   Style="{StaticResource formatoFormulario}"
                    Text="{Binding Apellidos, Mode=TwoWay}"/>
 
             <Label Text="Nacimiento:"/>
             <DatePicker HorizontalOptions="Start"
                         Date="{Binding Nacimiento, Mode=TwoWay}"/>
 
-            <Label Text="Telefono:"/>
+            <Label Text="*Telefono:"/>
             <Entry Placeholder="telefono" 
                    MaxLength="12"
+                   Style="{StaticResource formatoFormulario}"
                    Text="{Binding Telefono, Mode=TwoWay}"/>
             
             <!-- Radio button -->
-            <Picker Title="Sexo:" 
-                    SelectedItem="{Binding Sexo, Mode=TwoWay}">
+            <Picker Title="*Sexo:" 
+                    SelectedItem="{Binding Sexo, Mode=TwoWay}"
+                    Style="{StaticResource formatoFormularioPicker}">
                 <Picker.Items>
                     <x:String>Seleccionar...</x:String>
                     <x:String>Masculino</x:String>
@@ -53,7 +55,7 @@
             </Picker>
 
             <!-- Botones -->
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
                 <Button Text="Enviar"
                         Command="{Binding comandoAlta}"/>
                 <Button Text="Borrar"

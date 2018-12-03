@@ -6,6 +6,8 @@ using ProyectoXamarin.ViewModel;
 using ProyectoXamarin.DataModel;
 using System.Windows.Input;
 using Xamarin.Forms;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace ProyectoXamarin.ViewModel
 {
@@ -198,7 +200,7 @@ namespace ProyectoXamarin.ViewModel
         void limpiarCampos()
         {
             this.Nombre = "";
-            //this.NomAutor = "Seleccionar...";
+            //this.NomAutor = "";
             this.Lanzamiento = "2000/01/01";
             this.Paginas = "0";
             this.Aventura = false;
@@ -246,6 +248,17 @@ namespace ProyectoXamarin.ViewModel
             }
         }
 
+        // Muestra una aletra para preguntar si se quiere borrar, usando un atributo se comprueba en el comando
+        private bool canClean = false;
+        async Task OnAlertYesNoClicked()
+        {
+            var answer = await Application.Current.MainPage.DisplayAlert("", "¿Desea borrar el formulario?", "Si", "No");
+            if (answer)
+            {
+                canClean = true;
+            }
+        }
+
         // Comandos
         public ICommand comandoAlta { private set; get; }
         public ICommand comandoBorrado { private set; get; }
@@ -264,6 +277,7 @@ namespace ProyectoXamarin.ViewModel
                 comprobarGeneros();
                 DataAccess.AddLibro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), _generos);
                 limpiarCampos();
+                Application.Current.MainPage.DisplayAlert("Información", "Libro registrado con éxito.", "Aceptar");
                 RefreshCanExecutes();
             },
             canExecute: () =>
@@ -274,9 +288,14 @@ namespace ProyectoXamarin.ViewModel
             );
 
             comandoBorrado = new Command(
-            execute: () =>
+            execute: async () =>
             {
-                limpiarCampos();
+                await OnAlertYesNoClicked();
+                if (canClean)
+                {
+                    limpiarCampos();
+                }
+                canClean = false;
                 RefreshCanExecutes();
             },
             canExecute: () =>

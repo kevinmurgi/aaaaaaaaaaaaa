@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using ProyectoXamarin.ViewModel;
 using ProyectoXamarin.DataModel;
+using System.Threading.Tasks;
 
 namespace ProyectoXamarin.ViewModel
 {
@@ -128,6 +129,17 @@ namespace ProyectoXamarin.ViewModel
             ((Command)comandoBorrado).ChangeCanExecute();
         }
 
+        // Muestra una aletra para preguntar si se quiere borrar, usando un atributo se comprueba en el comando
+        private bool canClean = false;
+        async Task OnAlertYesNoClicked()
+        {
+            var answer = await Application.Current.MainPage.DisplayAlert("", "¿Desea borrar el formulario?", "Si", "No");
+            if (answer)
+            {
+                canClean = true;
+            }
+        }
+
         // Comandos
         public ICommand comandoAlta { private set; get; }
         public ICommand comandoBorrado { private set; get; }
@@ -140,6 +152,7 @@ namespace ProyectoXamarin.ViewModel
             {
                 DataAccess.AddAutor(Nombre, Apellidos, Nacimiento.Substring(0, 10), Telefono, Sexo);
                 limpiarCampos();
+                Application.Current.MainPage.DisplayAlert("Información", "Autor registrado con éxito.", "Aceptar");
                 RefreshCanExecutes();
             },
             canExecute: () =>
@@ -152,9 +165,14 @@ namespace ProyectoXamarin.ViewModel
             );
             
             comandoBorrado = new Command(
-            execute: () =>
+            execute: async () =>
             {
-                limpiarCampos();
+                await OnAlertYesNoClicked();
+                if (canClean)
+                {
+                    limpiarCampos();
+                }
+                canClean = false;
                 RefreshCanExecutes();
             },
             canExecute: () =>

@@ -3,6 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProyectoXamarin.App">
     <Application.Resources>
+        <Style TargetType="Label" x:Key="tituloPagina">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="Large"/>
+        </Style>
 
+        <Style TargetType="Entry" x:Key="formatoFormulario">
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="WidthRequest" Value="300"/>
+        </Style>
+
+        <Style TargetType="Picker" x:Key="formatoFormularioPicker">
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="WidthRequest" Value="300"/>
+        </Style>
+
+        <Style TargetType="StackLayout" x:Key="layoutPrincipal">
+            <Setter Property="Margin" Value="12, 0, 0, 0"/>
+            <Setter Property="Orientation" Value="Vertical"/>
+        </Style>
     </Application.Resources>
 </Application>
