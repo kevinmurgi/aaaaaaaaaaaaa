@@ -11,10 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\libro.png" />
     <None Remove="Assets\neeko.jpeg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Assets\libro.png" />
     <Content Include="Assets\neeko.jpeg" />
   </ItemGroup>
 

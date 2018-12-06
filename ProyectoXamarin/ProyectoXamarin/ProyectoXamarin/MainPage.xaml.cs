@@ -13,7 +13,6 @@ namespace ProyectoXamarin
         public MainPage()
         {
             InitializeComponent();
-
             // Primera pagina que se cargara cuando se ejecute la aplicacion
             Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(ListarAutores)));
         }

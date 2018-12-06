@@ -8,7 +8,7 @@
     <!-- El MasterBehavior es para que el menu se oculte y no quede fijo -->
 
     <MasterDetailPage.Master>
-        <ContentPage Title="Autores-Libros">
+        <ContentPage Title="Autores-Libros" BackgroundColor="{StaticResource MainColor}">
 
             <!-- Crea una instancia de ItemsMenu para tener la lista con todos los Items de que debe tener el menu de la app -->
             <ContentPage.Resources>
@@ -31,8 +31,8 @@
                                              VerticalOptions="FillAndExpand"
                                              Margin="8">
                                     <Image Source="{Binding Icono}"
-                                           WidthRequest="40"
-                                           HeightRequest="40"
+                                           WidthRequest="30"
+                                           HeightRequest="30"
                                            VerticalOptions="Start"/>
                                     <Label Text="{Binding Titulo}"
                                            FontSize="Small"

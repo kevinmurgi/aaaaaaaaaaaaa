@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:datos="clr-namespace:ProyectoXamarin.ViewModel"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
-             x:Class="ProyectoXamarin.ListarAutores">
+             x:Class="ProyectoXamarin.ListarAutores"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
     <!-- Crea una instancia de DatosAutores para tener la lista con todos los Autores de la BBDD -->
     <ContentPage.Resources>
@@ -25,8 +26,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Autor">
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" 
-                                             Margin="12, 12, 0, 12">
+                                <StackLayout Style="{StaticResource layoutListas}">
                                     <!-- La imagen tiene una ruta diferente dependiendo de donde se ejecuta la app -->
                                     <Image HeightRequest="80" 
                                            WidthRequest="80">
@@ -40,13 +40,16 @@
                                     </Image>
                                     <StackLayout Orientation="Vertical">
                                         <Label Text="{Binding Nombre}"
-                                               FontSize="Small"
-                                               FontAttributes="Bold"/>
+                                               Style="{StaticResource cabeceras}"/>
                                         <Label Text="{Binding Apellidos}"
-                                               FontAttributes="Bold"/>
-                                        <Label Text="{Binding Nacimiento}"/>
-                                        <Label Text="{Binding Telefono}"/>
-                                        <Label Text="{Binding Sexo}"/>
+                                               FontAttributes="Bold"
+                                               TextColor="{StaticResource AccentColor1}"/>
+                                        <Label Text="{Binding Nacimiento}"
+                                               TextColor="{StaticResource FontColor}"/>
+                                        <Label Text="{Binding Telefono}"
+                                               TextColor="{StaticResource FontColor}"/>
+                                        <Label Text="{Binding Sexo}"
+                                               TextColor="{StaticResource FontColor}"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>

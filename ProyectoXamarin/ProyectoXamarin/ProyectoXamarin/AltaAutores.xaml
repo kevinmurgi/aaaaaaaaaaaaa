@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ProyectoXamarin.ViewModel"
-             x:Class="ProyectoXamarin.AltaAutores">
+             x:Class="ProyectoXamarin.AltaAutores"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -17,33 +18,38 @@
 
             <!-- Titulo de la pagina -->
             <Label Text="Nuevo Autor"
-                    Style="{StaticResource tituloPagina}"/>
+                   Style="{StaticResource tituloPagina}"/>
 
             <!-- Formulario -->
-            <Label Text="*Nombre:"/>
+            <Label Text="*Nombre:"
+                   TextColor="{StaticResource FontColor}"/>
             <Entry Placeholder="nombre" 
                    MaxLength="20"
                    Style="{StaticResource formatoFormulario}"
                    Text="{Binding Nombre, Mode=TwoWay}"/>
 
-            <Label Text="*Apellidos:"/>
+            <Label Text="*Apellidos:"
+                   TextColor="{StaticResource FontColor}"/>
             <Entry Placeholder="apellidos" 
                    MaxLength="40"
                    Style="{StaticResource formatoFormulario}"
                    Text="{Binding Apellidos, Mode=TwoWay}"/>
 
-            <Label Text="Nacimiento:"/>
+            <Label Text="Nacimiento:"
+                   TextColor="{StaticResource FontColor}"/>
             <DatePicker HorizontalOptions="Start"
                         Date="{Binding Nacimiento, Mode=TwoWay}"/>
 
-            <Label Text="*Telefono:"/>
+            <Label Text="*Telefono:"
+                   TextColor="{StaticResource FontColor}"/>
             <Entry Placeholder="telefono" 
                    MaxLength="12"
                    Style="{StaticResource formatoFormulario}"
                    Text="{Binding Telefono, Mode=TwoWay}"/>
             
             <!-- Radio button -->
-            <Picker Title="*Sexo:" 
+            <Picker Title="*Sexo:"
+                    TextColor="{StaticResource FontColor}"
                     SelectedItem="{Binding Sexo, Mode=TwoWay}"
                     Style="{StaticResource formatoFormularioPicker}">
                 <Picker.Items>

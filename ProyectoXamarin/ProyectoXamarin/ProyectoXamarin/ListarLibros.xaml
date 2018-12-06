@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:datos="clr-namespace:ProyectoXamarin.ViewModel"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
-             x:Class="ProyectoXamarin.ListarLibros">
+             x:Class="ProyectoXamarin.ListarLibros"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
     <!-- Crea una instancia de DatosLibros para tener la lista con todos los Libros de la BBDD -->
     <ContentPage.Resources>
@@ -25,8 +26,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Libro">
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" 
-                                                 Margin="12, 12, 0, 12">
+                                <StackLayout Style="{StaticResource layoutListas}">
                                     <!-- La imagen tiene una ruta diferente dependiendo de donde se ejecuta la app -->
                                     <Image HeightRequest="80" 
                                                WidthRequest="80">
@@ -40,15 +40,19 @@
                                     </Image>
                                     <StackLayout Orientation="Vertical">
                                         <Label Text="{Binding Nombre}"
-                                               FontAttributes="Bold"
-                                               FontSize="Small"/>
-                                        <Label Text="{Binding AutorLibro}"/>
-                                        <Label Text="{Binding Lanzamiento}"/>
+                                               Style="{StaticResource cabeceras}"/>
+                                        <Label Text="{Binding AutorLibro}"
+                                               TextColor="{StaticResource FontColor}"/>
+                                        <Label Text="{Binding Lanzamiento}"
+                                               TextColor="{StaticResource FontColor}"/>
                                         <StackLayout Orientation="Horizontal">
-                                            <Label Text="{Binding Paginas}"/>
-                                            <Label Text="paginas"/>
+                                            <Label Text="{Binding Paginas}"
+                                                   TextColor="{StaticResource FontColor}"/>
+                                            <Label Text="paginas"
+                                                   TextColor="{StaticResource FontColor}"/>
                                         </StackLayout>
-                                        <Label Text="{Binding Genero}"/>
+                                        <Label Text="{Binding Genero}"
+                                               TextColor="{StaticResource FontColor}"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>
