@@ -208,5 +208,43 @@ namespace ProyectoXamarin.ViewModel
             }
             return libros;
         }
+
+        // Metodo para eliminar una entrada de la tabla autores
+        public static void BorrarAutor(string autor)
+        {
+            using (SqliteConnection db =
+                new SqliteConnection("Filename=sqliteSample.db"))
+            {
+                db.Open();
+
+                String tableCommand = "delete from Autores where nombre_autor = '" + autor + "'";
+
+                SqliteCommand deleteTable = new SqliteCommand(tableCommand, db);
+
+                deleteTable.ExecuteReader();
+
+                db.Close();
+            }
+
+        }
+
+        // Metodo para eliminar una entrada de la tabla libros
+        public static void BorrarLibro(string libro)
+        {
+            using (SqliteConnection db =
+                new SqliteConnection("Filename=sqliteSample.db"))
+            {
+                db.Open();
+
+                String tableCommand = "delete from Libros where nombre_libro = '" + libro + "'";
+
+                SqliteCommand deleteTable = new SqliteCommand(tableCommand, db);
+
+                deleteTable.ExecuteReader();
+
+                db.Close();
+            }
+
+        }
     }
 }

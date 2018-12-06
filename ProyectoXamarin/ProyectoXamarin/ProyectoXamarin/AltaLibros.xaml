@@ -18,86 +18,87 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource layoutPrincipal}"
-                     BindingContext="{StaticResource vmAltaLibro}">
+        <ScrollView Style="{StaticResource layoutPrincipal}">
+            <StackLayout BindingContext="{StaticResource vmAltaLibro}">
 
-            <!-- Titulo de la pagina -->
-            <Label Text="Nuevo Libro"
-                    Style="{StaticResource tituloPagina}"/>
+                <!-- Titulo de la pagina -->
+                <Label Text="Nuevo Libro"
+                        Style="{StaticResource tituloPagina}"/>
 
-            <!-- Formulario -->
-            <Label Text="*Nombre:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Entry Placeholder="nombre"
-                   MaxLength="30"
-                   Style="{StaticResource formatoFormulario}"
-                   Text="{Binding Nombre, Mode=TwoWay}"/>
+                <!-- Formulario -->
+                <Label Text="*Nombre:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Entry Placeholder="nombre"
+                       MaxLength="30"
+                       Style="{StaticResource formatoFormulario}"
+                       Text="{Binding Nombre, Mode=TwoWay}"/>
 
-            <Label Text="Autor:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Picker x:Name="autoresPicker" 
-                    Style="{StaticResource formatoFormularioPicker}"
-                    SelectedItem="{Binding NomAutor, Mode=TwoWay}"/>
+                <Label Text="Autor:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Picker x:Name="autoresPicker" 
+                        Style="{StaticResource formatoFormularioPicker}"
+                        SelectedItem="{Binding NomAutor, Mode=TwoWay}"/>
 
-            <Label Text="Lanzamiento:"
-                   TextColor="{StaticResource FontColor}"/>
-            <DatePicker HorizontalOptions="Start" 
-                        Date="{Binding Lanzamiento, Mode=TwoWay}"/>
+                <Label Text="Lanzamiento:"
+                       TextColor="{StaticResource FontColor}"/>
+                <DatePicker HorizontalOptions="Start" 
+                            Date="{Binding Lanzamiento, Mode=TwoWay}"/>
 
-            <Label Text="*Paginas:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Entry Placeholder="paginas"
-                   Style="{StaticResource formatoFormulario}"
-                   Text="{Binding Paginas, Mode=TwoWay}"/>
+                <Label Text="*Paginas:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Entry Placeholder="paginas"
+                       Style="{StaticResource formatoFormulario}"
+                       Text="{Binding Paginas, Mode=TwoWay}"/>
 
-            <!--Genero checkbox-->
-            <Label Text="Genero:"
-                   TextColor="{StaticResource FontColor}"/>
-            <StackLayout Orientation="Horizontal">
-                <StackLayout Orientation="Vertical">
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding Aventura}"/>
-                        <Label Text="Aventura"
-                               TextColor="{StaticResource FontColor}"/>
+                <!--Genero checkbox-->
+                <Label Text="Genero:"
+                       TextColor="{StaticResource FontColor}"/>
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding Aventura}"/>
+                            <Label Text="Aventura"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding CCFF}"/>
+                            <Label Text="Ciencia Ficción"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding Fantasia}"/>
+                            <Label Text="Fantasía"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding CCFF}"/>
-                        <Label Text="Ciencia Ficción"
-                               TextColor="{StaticResource FontColor}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding Fantasia}"/>
-                        <Label Text="Fantasía"
-                               TextColor="{StaticResource FontColor}"/>
+                    <StackLayout Orientation="Vertical" Margin="24, 0, 0, 0">
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding Paranormal}"/>
+                            <Label Text="Paranormal"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding Romance}"/>
+                            <Label Text="Romance"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding Comedia}"/>
+                            <Label Text="Comedia"
+                                   TextColor="{StaticResource FontColor}"/>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Orientation="Vertical" Margin="24, 0, 0, 0">
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding Paranormal}"/>
-                        <Label Text="Paranormal"
-                               TextColor="{StaticResource FontColor}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding Romance}"/>
-                        <Label Text="Romance"
-                               TextColor="{StaticResource FontColor}"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Switch IsToggled="{Binding Comedia}"/>
-                        <Label Text="Comedia"
-                               TextColor="{StaticResource FontColor}"/>
-                    </StackLayout>
-                </StackLayout>
-            </StackLayout>
             
 
-            <!-- Botones -->
-            <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
-                <Button Text="Enviar"
-                        Command="{Binding comandoAlta}"/>
-                <Button Text="Borrar"
-                        Command="{Binding comandoBorrado}"/>
+                <!-- Botones -->
+                <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
+                    <Button Text="Enviar"
+                            Command="{Binding comandoAlta}"/>
+                    <Button Text="Borrar"
+                            Command="{Binding comandoBorrado}"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

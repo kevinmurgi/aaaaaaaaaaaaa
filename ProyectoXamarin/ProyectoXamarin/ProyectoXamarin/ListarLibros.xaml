@@ -15,10 +15,15 @@
 
     <ContentPage.Content>
         <StackLayout Style="{StaticResource layoutPrincipal}">
-            <!-- Titulo de la pagina -->
-            <Label
-                Text="Libros"
-                Style="{StaticResource tituloPagina}"/>
+            <StackLayout Orientation="Horizontal">
+                <!-- Titulo de la pagina -->
+                <Label
+                    Text="Libros"
+                    Style="{StaticResource tituloPagina}"/>
+                <Button HorizontalOptions="End" 
+                        VerticalOptions="Center" 
+                        Text="Borrar"/>
+            </StackLayout>
 
             <ScrollView>
                 <!-- Lista con los objetos Libro de la instancia anteriormente creada (y ahora bindeada) -->

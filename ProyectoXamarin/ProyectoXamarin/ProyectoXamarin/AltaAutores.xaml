@@ -12,62 +12,62 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
+        <ScrollView Style="{StaticResource layoutPrincipal}">
+            <StackLayout BindingContext="{StaticResource vmAltaAutor}">
 
-        <StackLayout Style="{StaticResource layoutPrincipal}"
-                     BindingContext="{StaticResource vmAltaAutor}">
+                <!-- Titulo de la pagina -->
+                <Label Text="Nuevo Autor"
+                       Style="{StaticResource tituloPagina}"/>
 
-            <!-- Titulo de la pagina -->
-            <Label Text="Nuevo Autor"
-                   Style="{StaticResource tituloPagina}"/>
+                <!-- Formulario -->
+                <Label Text="*Nombre:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Entry Placeholder="nombre" 
+                       MaxLength="20"
+                       Style="{StaticResource formatoFormulario}"
+                       Text="{Binding Nombre, Mode=TwoWay}"/>
 
-            <!-- Formulario -->
-            <Label Text="*Nombre:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Entry Placeholder="nombre" 
-                   MaxLength="20"
-                   Style="{StaticResource formatoFormulario}"
-                   Text="{Binding Nombre, Mode=TwoWay}"/>
+                <Label Text="*Apellidos:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Entry Placeholder="apellidos" 
+                       MaxLength="40"
+                       Style="{StaticResource formatoFormulario}"
+                       Text="{Binding Apellidos, Mode=TwoWay}"/>
 
-            <Label Text="*Apellidos:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Entry Placeholder="apellidos" 
-                   MaxLength="40"
-                   Style="{StaticResource formatoFormulario}"
-                   Text="{Binding Apellidos, Mode=TwoWay}"/>
+                <Label Text="Nacimiento:"
+                       TextColor="{StaticResource FontColor}"/>
+                <DatePicker HorizontalOptions="Start"
+                            Date="{Binding Nacimiento, Mode=TwoWay}"/>
 
-            <Label Text="Nacimiento:"
-                   TextColor="{StaticResource FontColor}"/>
-            <DatePicker HorizontalOptions="Start"
-                        Date="{Binding Nacimiento, Mode=TwoWay}"/>
-
-            <Label Text="*Telefono:"
-                   TextColor="{StaticResource FontColor}"/>
-            <Entry Placeholder="telefono" 
-                   MaxLength="12"
-                   Style="{StaticResource formatoFormulario}"
-                   Text="{Binding Telefono, Mode=TwoWay}"/>
+                <Label Text="*Telefono:"
+                       TextColor="{StaticResource FontColor}"/>
+                <Entry Placeholder="telefono" 
+                       MaxLength="12"
+                       Style="{StaticResource formatoFormulario}"
+                       Text="{Binding Telefono, Mode=TwoWay}"/>
             
-            <!-- Radio button -->
-            <Picker Title="*Sexo:"
-                    TextColor="{StaticResource FontColor}"
-                    SelectedItem="{Binding Sexo, Mode=TwoWay}"
-                    Style="{StaticResource formatoFormularioPicker}">
-                <Picker.Items>
-                    <x:String>Seleccionar...</x:String>
-                    <x:String>Masculino</x:String>
-                    <x:String>Femenino</x:String>
-                    <x:String>Otro</x:String>
-                </Picker.Items>
-            </Picker>
+                <!-- Radio button -->
+                <Picker Title="*Sexo:"
+                        TextColor="{StaticResource FontColor}"
+                        SelectedItem="{Binding Sexo, Mode=TwoWay}"
+                        Style="{StaticResource formatoFormularioPicker}">
+                    <Picker.Items>
+                        <x:String>Seleccionar...</x:String>
+                        <x:String>Masculino</x:String>
+                        <x:String>Femenino</x:String>
+                        <x:String>Otro</x:String>
+                    </Picker.Items>
+                </Picker>
 
-            <!-- Botones -->
-            <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
-                <Button Text="Enviar"
-                        Command="{Binding comandoAlta}"/>
-                <Button Text="Borrar"
-                        Command="{Binding comandoBorrado}"/>
+                <!-- Botones -->
+                <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
+                    <Button Text="Enviar"
+                            Command="{Binding comandoAlta}"/>
+                    <Button Text="Borrar"
+                            Command="{Binding comandoBorrado}"/>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
     
 </ContentPage>

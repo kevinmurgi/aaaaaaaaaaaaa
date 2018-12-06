@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:ProyectoXamarin"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.MainPage"
-             MasterBehavior="Popover">
+             MasterBehavior="Popover"
+             BackgroundColor="{StaticResource MainColor}">
     <!-- El MasterBehavior es para que el menu se oculte y no quede fijo -->
 
     <MasterDetailPage.Master>
