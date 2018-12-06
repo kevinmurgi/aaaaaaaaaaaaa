@@ -24,7 +24,16 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.0.1" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="1.1.1" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.2" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.231" />
     <PackageReference Include="Xamarin.Forms" Version="3.1.0.697729" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Idiomas.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Idiomas.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +42,13 @@
     </EmbeddedResource>
     <EmbeddedResource Update="AltaLibros.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Idiomas.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Idiomas.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="ListarAutores.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

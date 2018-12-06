@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ProyectoXamarin.ViewModel"
              x:Class="ProyectoXamarin.AltaLibros"
+             xmlns:Resource="clr-namespace:ProyectoXamarin"
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -22,20 +23,20 @@
             <StackLayout BindingContext="{StaticResource vmAltaLibro}">
 
                 <!-- Titulo de la pagina -->
-                <Label Text="Nuevo Libro"
+                <Label Text="{x:Static Resource:Idiomas.newBookTitle}"
                         Style="{StaticResource tituloPagina}"/>
 
                 <!-- Formulario -->
-                <Label Text="*Nombre:"
+                <Label Text="{x:Static Resource:Idiomas.nameLabel}"
                        TextColor="{StaticResource FontColor}"/>
-                <Entry Placeholder="nombre"
+                <Entry Placeholder="{x:Static Resource:Idiomas.namePlaceholder}"
                        MaxLength="30"
                        Style="{StaticResource formatoFormulario}"
                        Text="{Binding Nombre, Mode=TwoWay}"/>
 
-                <Label Text="Autor:"
+                <Label Text="{x:Static Resource:Idiomas.authorLabel}"
                        TextColor="{StaticResource FontColor}"/>
-                <Picker x:Name="autoresPicker" 
+                <Picker x:Name="autoresPicker"
                         Style="{StaticResource formatoFormularioPicker}"
                         SelectedItem="{Binding NomAutor, Mode=TwoWay}"/>
 
@@ -44,47 +45,48 @@
                 <DatePicker HorizontalOptions="Start" 
                             Date="{Binding Lanzamiento, Mode=TwoWay}"/>
 
-                <Label Text="*Paginas:"
+                <Label Text="{x:Static Resource:Idiomas.pagesLabelForm}"
                        TextColor="{StaticResource FontColor}"/>
-                <Entry Placeholder="paginas"
+                <Entry Placeholder="{x:Static Resource:Idiomas.pagesLabel}"
                        Style="{StaticResource formatoFormulario}"
-                       Text="{Binding Paginas, Mode=TwoWay}"/>
+                       Text="{Binding Paginas, Mode=TwoWay}"
+                       Keyboard="Numeric"/>
 
                 <!--Genero checkbox-->
-                <Label Text="Genero:"
+                <Label Text="{x:Static Resource:Idiomas.typeLabel}"
                        TextColor="{StaticResource FontColor}"/>
                 <StackLayout Orientation="Horizontal">
                     <StackLayout Orientation="Vertical">
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding Aventura}"/>
-                            <Label Text="Aventura"
+                            <Label Text="{x:Static Resource:Idiomas.adventureLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding CCFF}"/>
-                            <Label Text="Ciencia Ficción"
+                            <Label Text="{x:Static Resource:Idiomas.scifiLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding Fantasia}"/>
-                            <Label Text="Fantasía"
+                            <Label Text="{x:Static Resource:Idiomas.fantasyLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Margin="24, 0, 0, 0">
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding Paranormal}"/>
-                            <Label Text="Paranormal"
+                            <Label Text="{x:Static Resource:Idiomas.paranormalLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding Romance}"/>
-                            <Label Text="Romance"
+                            <Label Text="{x:Static Resource:Idiomas.romanceLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                         <StackLayout Orientation="Horizontal">
                             <Switch IsToggled="{Binding Comedia}"/>
-                            <Label Text="Comedia"
+                            <Label Text="{x:Static Resource:Idiomas.comedyLabel}"
                                    TextColor="{StaticResource FontColor}"/>
                         </StackLayout>
                     </StackLayout>
@@ -93,9 +95,9 @@
 
                 <!-- Botones -->
                 <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
-                    <Button Text="Enviar"
+                    <Button Text="{x:Static Resource:Idiomas.btnSend}"
                             Command="{Binding comandoAlta}"/>
-                    <Button Text="Borrar"
+                    <Button Text="{x:Static Resource:Idiomas.btnDelete}"
                             Command="{Binding comandoBorrado}"/>
                 </StackLayout>
             </StackLayout>

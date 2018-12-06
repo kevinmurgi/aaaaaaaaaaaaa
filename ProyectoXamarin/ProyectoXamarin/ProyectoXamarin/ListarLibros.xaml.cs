@@ -15,5 +15,12 @@ namespace ProyectoXamarin
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            listaLibros.ItemsSource = await App.Database.GetLibros();
+        }
+    }
 }

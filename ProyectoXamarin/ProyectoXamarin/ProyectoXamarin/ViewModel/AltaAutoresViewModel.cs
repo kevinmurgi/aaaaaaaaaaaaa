@@ -150,7 +150,7 @@ namespace ProyectoXamarin.ViewModel
             comandoAlta = new Command(
             execute: () =>
             {
-                DataAccess.AddAutor(Nombre, Apellidos, Nacimiento.Substring(0, 10), Telefono, Sexo);
+                App.Database.AddAutor(new Autor(Nombre, Apellidos, Nacimiento.Substring(0, 10), Telefono, Sexo));
                 limpiarCampos();
                 Application.Current.MainPage.DisplayAlert("Información", "Autor registrado con éxito.", "Aceptar");
                 RefreshCanExecutes();

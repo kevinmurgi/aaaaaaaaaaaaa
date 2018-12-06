@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:ProyectoXamarin.ViewModel"
              x:Class="ProyectoXamarin.AltaAutores"
+             xmlns:Resource="clr-namespace:ProyectoXamarin"
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
@@ -16,38 +17,38 @@
             <StackLayout BindingContext="{StaticResource vmAltaAutor}">
 
                 <!-- Titulo de la pagina -->
-                <Label Text="Nuevo Autor"
+                <Label Text="{x:Static Resource:Idiomas.newAuthorTitle}"
                        Style="{StaticResource tituloPagina}"/>
 
                 <!-- Formulario -->
-                <Label Text="*Nombre:"
+                <Label Text="{x:Static Resource:Idiomas.nameLabel}"
                        TextColor="{StaticResource FontColor}"/>
-                <Entry Placeholder="nombre" 
+                <Entry Placeholder="{x:Static Resource:Idiomas.namePlaceholder}" 
                        MaxLength="20"
                        Style="{StaticResource formatoFormulario}"
                        Text="{Binding Nombre, Mode=TwoWay}"/>
 
-                <Label Text="*Apellidos:"
+                <Label Text="{x:Static Resource:Idiomas.surnameLabel}"
                        TextColor="{StaticResource FontColor}"/>
-                <Entry Placeholder="apellidos" 
+                <Entry Placeholder="{x:Static Resource:Idiomas.surnamePlaceholder}" 
                        MaxLength="40"
                        Style="{StaticResource formatoFormulario}"
                        Text="{Binding Apellidos, Mode=TwoWay}"/>
 
-                <Label Text="Nacimiento:"
+                <Label Text="{x:Static Resource:Idiomas.birthLabel}"
                        TextColor="{StaticResource FontColor}"/>
                 <DatePicker HorizontalOptions="Start"
                             Date="{Binding Nacimiento, Mode=TwoWay}"/>
 
-                <Label Text="*Telefono:"
+                <Label Text="{x:Static Resource:Idiomas.phoneLabel}"
                        TextColor="{StaticResource FontColor}"/>
-                <Entry Placeholder="telefono" 
+                <Entry Placeholder="{x:Static Resource:Idiomas.phonePlaceholder}" 
                        MaxLength="12"
                        Style="{StaticResource formatoFormulario}"
                        Text="{Binding Telefono, Mode=TwoWay}"/>
             
                 <!-- Radio button -->
-                <Picker Title="*Sexo:"
+                <Picker Title="{x:Static Resource:Idiomas.sexLabel}"
                         TextColor="{StaticResource FontColor}"
                         SelectedItem="{Binding Sexo, Mode=TwoWay}"
                         Style="{StaticResource formatoFormularioPicker}">
@@ -61,9 +62,9 @@
 
                 <!-- Botones -->
                 <StackLayout Orientation="Horizontal" Margin="0, 12, 0, 0">
-                    <Button Text="Enviar"
+                    <Button Text="{x:Static Resource:Idiomas.btnSend}"
                             Command="{Binding comandoAlta}"/>
-                    <Button Text="Borrar"
+                    <Button Text="{x:Static Resource:Idiomas.btnDelete}"
                             Command="{Binding comandoBorrado}"/>
                 </StackLayout>
             </StackLayout>

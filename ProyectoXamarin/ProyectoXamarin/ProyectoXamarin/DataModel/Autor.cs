@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -25,6 +26,7 @@ namespace ProyectoXamarin.DataModel
 
         // Atributos de la clase
         private string _nombre;
+        [PrimaryKey]
         public string Nombre
         {
             get

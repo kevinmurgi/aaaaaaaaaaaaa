@@ -275,7 +275,7 @@ namespace ProyectoXamarin.ViewModel
                     autorAux = NomAutor;
                 }
                 comprobarGeneros();
-                DataAccess.AddLibro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), _generos);
+                App.Database.AddLibro(new Libro(Nombre, autorAux, Lanzamiento, Int32.Parse(Paginas), _generos));
                 limpiarCampos();
                 Application.Current.MainPage.DisplayAlert("Información", "Libro registrado con éxito.", "Aceptar");
                 RefreshCanExecutes();

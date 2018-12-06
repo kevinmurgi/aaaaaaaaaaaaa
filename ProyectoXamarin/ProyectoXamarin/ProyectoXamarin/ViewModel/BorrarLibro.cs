@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoXamarin.ViewModel
 {
-    public class BorrarAutor : INotifyPropertyChanged
+    public class BorrarLibro : INotifyPropertyChanged
     {
         // Evento y metodo de PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -25,17 +25,17 @@ namespace ProyectoXamarin.ViewModel
         }
 
         // Atributos
-        private Autor _autorActual;
-        public Autor AutorActual
+        private Libro _libroActual;
+        public Libro LibroActual
         {
             get
             {
-                return _autorActual;
+                return _libroActual;
             }
             set
             {
-                this._autorActual = value;
-                OnPropertyChanged("AutorActual");
+                this._libroActual = value;
+                OnPropertyChanged("LibroActual");
                 RefreshCanExecutes();
             }
         }
@@ -53,7 +53,7 @@ namespace ProyectoXamarin.ViewModel
         private bool canClean = false;
         async Task OnAlertYesNoClicked()
         {
-            var answer = await Application.Current.MainPage.DisplayAlert("", "¿Desea borrar el autor?", "Si", "No");
+            var answer = await Application.Current.MainPage.DisplayAlert("", "¿Desea borrar el libro?", "Si", "No");
             if (answer)
             {
                 canClean = true;
@@ -61,7 +61,7 @@ namespace ProyectoXamarin.ViewModel
         }
 
         // Constructores
-        public BorrarAutor()
+        public BorrarLibro()
         {
             comandoBorrar = new Command(
             execute: async () =>
@@ -69,16 +69,16 @@ namespace ProyectoXamarin.ViewModel
                 await OnAlertYesNoClicked();
                 if (canClean)
                 {
-                    await App.Database.DeleteAutor(AutorActual);
+                    await App.Database.DeleteLibro(LibroActual);
                     var pagina = ((MasterDetailPage)Application.Current.MainPage);
-                    pagina.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(ListarAutores)));
+                    pagina.Detail = new NavigationPage((Page)Activator.CreateInstance(typeof(ListarLibros)));
                 }
                 canClean = false;
                 RefreshCanExecutes();
             },
             canExecute: () =>
             {
-                return AutorActual != null;
+                return LibroActual != null;
             }
             );
         }

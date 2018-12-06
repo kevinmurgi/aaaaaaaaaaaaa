@@ -4,30 +4,32 @@
              xmlns:datos="clr-namespace:ProyectoXamarin.ViewModel"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.ListarLibros"
+             xmlns:Resource="clr-namespace:ProyectoXamarin"
              BackgroundColor="{StaticResource BackgroundColor}">
 
-    <!-- Crea una instancia de DatosLibros para tener la lista con todos los Libros de la BBDD -->
+    <!-- Crea una instancia de DatosAutores para tener la lista con todos los Autores de la BBDD -->
     <ContentPage.Resources>
         <ResourceDictionary>
-            <datos:DatosLibros x:Key="datosLibros"/>
+            <datos:BorrarLibro x:Key="borrarLibro"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-
+    
     <ContentPage.Content>
         <StackLayout Style="{StaticResource layoutPrincipal}">
             <StackLayout Orientation="Horizontal">
                 <!-- Titulo de la pagina -->
                 <Label
-                    Text="Libros"
+                    Text="{x:Static Resource:Idiomas.booksTitle}"
                     Style="{StaticResource tituloPagina}"/>
                 <Button HorizontalOptions="End" 
                         VerticalOptions="Center" 
-                        Text="Borrar"/>
+                        Text="Borrar"
+                        Command="{Binding comandoBorrar, Source={StaticResource borrarLibro}}"/>
             </StackLayout>
 
             <ScrollView>
                 <!-- Lista con los objetos Libro de la instancia anteriormente creada (y ahora bindeada) -->
-                <ListView ItemsSource="{Binding Libros, Source={StaticResource datosLibros}}">
+                <ListView x:Name="listaLibros" SelectedItem="{Binding LibroActual, Source={StaticResource borrarLibro}}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Libro">
                             <ViewCell>
@@ -53,7 +55,7 @@
                                         <StackLayout Orientation="Horizontal">
                                             <Label Text="{Binding Paginas}"
                                                    TextColor="{StaticResource FontColor}"/>
-                                            <Label Text="paginas"
+                                            <Label Text="{x:Static Resource:Idiomas.pagesLabel}"
                                                    TextColor="{StaticResource FontColor}"/>
                                         </StackLayout>
                                         <Label Text="{Binding Genero}"

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,15 @@ namespace ProyectoXamarin
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ListarAutores : ContentPage
 	{
-		public ListarAutores ()
+        public ListarAutores ()
 		{
             InitializeComponent ();
         }
-	}
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            listaAutores.ItemsSource = await App.Database.GetAutores();
+        }
+    }
 }

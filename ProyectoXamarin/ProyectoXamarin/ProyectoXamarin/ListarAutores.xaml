@@ -4,12 +4,12 @@
              xmlns:datos="clr-namespace:ProyectoXamarin.ViewModel"
              xmlns:modelo="clr-namespace:ProyectoXamarin.DataModel"
              x:Class="ProyectoXamarin.ListarAutores"
+             xmlns:Resource="clr-namespace:ProyectoXamarin"
              BackgroundColor="{StaticResource BackgroundColor}">
 
     <!-- Crea una instancia de DatosAutores para tener la lista con todos los Autores de la BBDD -->
     <ContentPage.Resources>
         <ResourceDictionary>
-            <datos:DatosAutores x:Key="datosAutores"/>
             <datos:BorrarAutor x:Key="borrarAutor"/>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -19,7 +19,7 @@
             <StackLayout Orientation="Horizontal">
                 <!-- Titulo de la pagina -->
                 <Label
-                    Text="Autores"
+                    Text="{x:Static Resource:Idiomas.authorsTitle}"
                     Style="{StaticResource tituloPagina}"/>
                 <Button HorizontalOptions="End" 
                         VerticalOptions="Center" 
@@ -29,7 +29,7 @@
 
             <ScrollView>
                 <!-- Lista con los objetos Autor de la instancia anteriormente creada (y ahora bindeada) -->
-                <ListView ItemsSource="{Binding Autores, Source={StaticResource datosAutores}}" SelectedItem="{Binding AutorActual, Source={StaticResource borrarAutor}}">
+                <ListView x:Name="listaAutores" SelectedItem="{Binding AutorActual, Source={StaticResource borrarAutor}}">
                     <ListView.ItemTemplate>
                         <DataTemplate x:DataType="modelo:Autor">
                             <ViewCell>
