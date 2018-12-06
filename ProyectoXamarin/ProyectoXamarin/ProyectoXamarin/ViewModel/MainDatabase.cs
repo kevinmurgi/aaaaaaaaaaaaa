@@ -21,11 +21,11 @@ namespace ProyectoXamarin.ViewModel
         // Metodos que devuelven una lista con los autores
         public Task<List<Autor>> GetAutores()
         {
-            return database.Table<Autor>().ToListAsync();
+            return database.Table<Autor>().OrderBy(xx => xx.Nombre).ToListAsync();
         }
         public Task<List<Libro>> GetLibros()
         {
-            return database.Table<Libro>().ToListAsync();
+            return database.Table<Libro>().OrderBy(xx => xx.Nombre).ToListAsync();
         }
         
         // Metodos que añaden objetos

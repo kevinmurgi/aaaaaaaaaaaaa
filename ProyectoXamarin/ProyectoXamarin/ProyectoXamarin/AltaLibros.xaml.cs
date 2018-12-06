@@ -14,7 +14,6 @@ namespace ProyectoXamarin
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AltaLibros : ContentPage
 	{
-        private List<Autor> autores;
 
         public AltaLibros ()
 		{
