@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ExamenBindingMVVM"
+             xmlns:datos="clr-namespace:ExamenBindingMVVM.ModeloDatos"
+             x:Class="ExamenBindingMVVM.MainPage"
+                  MasterBehavior="Popover">
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Citas">
+
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <datos:ItemsMenu x:Key="menu"/>
+                </ResourceDictionary>
+            </ContentPage.Resources>
+
+            <StackLayout BindingContext="{StaticResource menu}">
+                <ListView ItemsSource="{Binding ItemsMenuPrincipal}" ItemSelected="ListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="datos:ItemNavegacion">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Margin="8" VerticalOptions="FillAndExpand">
+                                    <Image Source="{Binding icono}"
+                                           WidthRequest="30"
+                                           HeightRequest="30"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="Start"/>
+                                    <Label Text="{Binding titulo}" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+
+    <MasterDetailPage.Detail>
+        <NavigationPage>
+            
+        </NavigationPage>
+    </MasterDetailPage.Detail>
+
+</MasterDetailPage>

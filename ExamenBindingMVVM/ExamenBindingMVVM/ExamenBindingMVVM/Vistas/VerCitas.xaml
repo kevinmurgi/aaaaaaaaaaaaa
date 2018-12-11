@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datos="clr-namespace:ExamenBindingMVVM.ModeloDatos"
+             xmlns:modelos="clr-namespace:ExamenBindingMVVM.ViewModel"
+             x:Class="ExamenBindingMVVM.VerCitas">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <modelos:BorrarCita x:Key="borrarCita"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" Margin="12">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Citas" 
+                   FontSize="Large" 
+                   FontAttributes="Bold"/>
+
+                <Button Text="Borrar" 
+                        Command="{Binding comandoBorrar, Source={StaticResource borrarCita}}"
+                        BackgroundColor="Black"
+                        TextColor="White"
+                        Margin="16, 0, 0, 0"/>
+            </StackLayout>
+
+            <ScrollView>
+                <ListView x:Name="listaCitas" 
+                          SelectedItem="{Binding CitaActual, Source={StaticResource borrarCita}, Mode=TwoWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="datos:Cita">
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" Margin="0, 4, 0, 8">
+                                    <Image Source="Assets/persona.png" 
+                                           WidthRequest="50" 
+                                           HeightRequest="50" 
+                                           VerticalOptions="CenterAndExpand"/>
+
+                                    <StackLayout Orientation="Vertical" Margin="8, 0, 0, 0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="Paciente: "/>
+                                            <Label Text="{Binding Apellidos}"/>
+                                            <Label Text="{Binding Nombre}"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding FechaCita}"/>
+                                            <Label Text="{Binding HoraCita}"/>
+                                        </StackLayout>
+                                        <Label Text="{Binding MotivoCita}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

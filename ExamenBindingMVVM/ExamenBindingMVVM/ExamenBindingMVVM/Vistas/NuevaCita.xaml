@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:datos="clr-namespace:ExamenBindingMVVM.ModeloDatos"
+             xmlns:modelos="clr-namespace:ExamenBindingMVVM.ViewModel"
+             x:Class="ExamenBindingMVVM.NuevaCita">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <modelos:NuevaCitaViewModel x:Key="vmCita"/>
+        </ResourceDictionary>
+
+        <Style TargetType="Entry">
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="WidthRequest" Value="300"/>
+        </Style>
+        
+        <Style TargetType="Picker">
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="WidthRequest" Value="300"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     BindingContext="{StaticResource vmCita}"
+                     Margin="8">
+            
+            <Label Text="Nueva Cita" 
+                   FontSize="Large" 
+                   FontAttributes="Bold"/>
+
+            <Label Text="*Nombre:"/>
+            <Entry Text="{Binding Nombre, Mode=TwoWay}"/>
+
+            <Label Text="Apellidos:"/>
+            <Entry Text="{Binding Apellidos, Mode=TwoWay}"/>
+
+            <Label Text="*Fecha de la cita:"/>
+            <DatePicker HorizontalOptions="Start"
+                        Date="{Binding FechaCita, Mode=TwoWay}"/>
+
+            <Label Text="*Hora de la cita:" x:Name="aa"/>
+            <TimePicker HorizontalOptions="Start" x:Name="aaa"
+                        Time="{Binding HoraCita, Mode=TwoWay}"/>
+
+            <Label Text="*Motivo de la cita:"/>
+            <Picker SelectedItem="{Binding MotivoCita, Mode=TwoWay}">
+                <Picker.Items>
+                    <x:String>Seleccionar...</x:String>
+                    <x:String>Primera Cita</x:String>
+                    <x:String>Revisión</x:String>
+                    <x:String>Urgencia</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Enviar"
+                        Command="{Binding comandoCrear}"
+                        BackgroundColor="Black"
+                        TextColor="White"/>
+                <Button Text="Borrar"
+                        Command="{Binding comandoBorrar}"
+                        BackgroundColor="Black"
+                        TextColor="White"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
