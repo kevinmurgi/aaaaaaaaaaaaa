@@ -1,0 +1,25 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CustomControls2">
+
+    <Style TargetType="local:SolarSystem" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:SolarSystem">
+                    <Grid Background="{TemplateBinding Background}"
+                          Margin="20">
+                        <Canvas x:Name="canvasTemplate" 
+                                HorizontalAlignment="Right" 
+                                VerticalAlignment="Center"/>
+                        <Ellipse Width="150" 
+                                 Height="150" 
+                                 Fill="Yellow"
+                                 HorizontalAlignment="Right" 
+                                 VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
