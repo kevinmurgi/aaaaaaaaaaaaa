@@ -56,6 +56,12 @@ namespace CustomControls2
                     _canvas.Children.Add(element);
                     Canvas.SetLeft(element, (radioSol * -1) + (item.DistanciaSol * -1));
                     Canvas.SetTop(element, (item.Diametro/2) * -1);
+                    var title = new TextBlock();
+                    title.Text = item.Nombre;
+                    title.HorizontalAlignment = HorizontalAlignment.Center;
+                    _canvas.Children.Add(title);
+                    Canvas.SetLeft(title, (radioSol * -1) + (item.DistanciaSol * -1));
+                    Canvas.SetTop(title, ((item.Diametro/2) + 20) * -1);
                 }
             }
         }

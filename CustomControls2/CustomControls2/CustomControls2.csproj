@@ -110,7 +110,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\jupiter.jpg" />
+    <Content Include="Assets\marte.jpg" />
+    <Content Include="Assets\mercurio.jpg" />
+    <Content Include="Assets\neptuno.jpg" />
     <Content Include="Assets\saturno.jpg" />
+    <Content Include="Assets\sol.jpg" />
+    <Content Include="Assets\tierra.png" />
+    <Content Include="Assets\urano.jpg" />
+    <Content Include="Assets\venus.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

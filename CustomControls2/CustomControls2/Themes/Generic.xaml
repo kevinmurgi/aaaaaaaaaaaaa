@@ -9,14 +9,22 @@
                 <ControlTemplate TargetType="local:SolarSystem">
                     <Grid Background="{TemplateBinding Background}"
                           Margin="20">
+                        <TextBlock Text="Solar System" Style="{StaticResource HeaderTextBlockStyle}" TextDecorations="Underline"/>
                         <Canvas x:Name="canvasTemplate" 
                                 HorizontalAlignment="Right" 
                                 VerticalAlignment="Center"/>
-                        <Ellipse Width="150" 
-                                 Height="150" 
-                                 Fill="Yellow"
-                                 HorizontalAlignment="Right" 
-                                 VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Right" 
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="SOL" 
+                                       HorizontalAlignment="Center"/>
+                            <Ellipse Width="150" 
+                                     Height="150">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Assets/sol.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
