@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -9,6 +10,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
@@ -20,7 +22,10 @@ namespace CustomControls2
     {
         // Atributos
         Canvas _canvas;
-        private int radioSol = 75;
+        private double distanciaMaxItems = 0;
+        private double distanciaPorPixel = 0;
+        private double diametroMaxItems = 0;
+        private double diametroMaxPorPixel = 0;
 
         // Constructor
         public SolarSystem()
@@ -35,10 +40,48 @@ namespace CustomControls2
         {
             base.OnApplyTemplate();
 
+            if (this.MaxItemSize == 0)
+            {
+                this.MaxItemSize = 100;
+            }
+            if (this.MinItemSize == 0)
+            {
+                this.MinItemSize = 10;
+            }
+
             _canvas = (Canvas)GetTemplateChild("canvasTemplate");
+            Ellipse sol = (Ellipse)GetTemplateChild("sol");
+            sol.Width = sol.Height = this.MaxItemSize;
+
             if (_canvas != null)
             {
+                getTamaños();
                 crearPlanetas();
+            }
+        }
+
+        private void getTamaños()
+        {
+            // Recorre todos los planetas
+            if (ItemsSource != null)
+            {
+                foreach (var item in ItemsSource)
+                {
+                    // Guarda siempre la DistanciaSol mas grande
+                    if (item.DistanciaSol > this.distanciaMaxItems)
+                    {
+                        this.distanciaMaxItems = item.DistanciaSol;
+                    }
+                    // Guarda siempre el Diametro mas grande
+                    if (item.Diametro > this.diametroMaxItems)
+                    {
+                        this.diametroMaxItems = item.Diametro;
+                    }
+                }
+                // Por ultimo realiza la relacion entre la distancia mas grande y el tamaño del Layout donde se encuentra el objeto
+                this.distanciaPorPixel = (this.Width / 2) / this.distanciaMaxItems;
+                // Por ultimo realiza la relacion entre el diametro mas grande y el tamaño maximo del diametro
+                this.diametroMaxPorPixel = this.MaxItemSize / this.diametroMaxItems;
             }
         }
 
@@ -47,21 +90,34 @@ namespace CustomControls2
             if (ItemsSource != null)
             {
                 _canvas.Children.Clear();
+                // Por cada planeta
                 foreach (var item in ItemsSource)
                 {
+                    // Crea una eclipse
                     var element = new Ellipse();
-                    //element.Fill = item.Color;
+                    // Le pone como fondo su imagen
                     element.Fill = new ImageBrush() { ImageSource = new BitmapImage() { UriSource = new Uri("ms-appx:///"+item.Imagen) } };
-                    element.Width = element.Height = item.Diametro;
+                    // Le establece su tamaño
+                    element.Width = element.Height = (item.Diametro * this.diametroMaxPorPixel);
+                    if (element.Width < this.MinItemSize)
+                    {
+                        element.Width = element.Height = this.MinItemSize;
+                    }
+                    // Lo añade al canvas y establece su posicion
                     _canvas.Children.Add(element);
-                    Canvas.SetLeft(element, (radioSol * -1) + (item.DistanciaSol * -1));
-                    Canvas.SetTop(element, (item.Diametro/2) * -1);
+                    // Posicion = DistanciaSol * la relacion de pixel con la distancia - el radio del planeta
+                    // (por defecto el canvas esta en el centro)
+                    Canvas.SetLeft(element, -1*((item.DistanciaSol * this.distanciaPorPixel) - (item.Diametro/2)));
+                    Canvas.SetTop(element, (element.Width/2) * -1);
+
+                    /*
                     var title = new TextBlock();
                     title.Text = item.Nombre;
                     title.HorizontalAlignment = HorizontalAlignment.Center;
                     _canvas.Children.Add(title);
                     Canvas.SetLeft(title, (radioSol * -1) + (item.DistanciaSol * -1));
                     Canvas.SetTop(title, ((item.Diametro/2) + 20) * -1);
+                    */
                 }
             }
         }

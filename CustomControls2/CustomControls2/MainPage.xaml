@@ -8,9 +8,12 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Width="1000"
+          Height="500" >
         <local:SolarSystem x:Name="Visualizer" 
                            MaxItemSize="60" 
-                           MinItemSize="20"/>
+                           MinItemSize="20" 
+                           Height="300" 
+                           Width="900"/>
     </Grid>
 </Page>
