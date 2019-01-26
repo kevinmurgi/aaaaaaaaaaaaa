@@ -7,18 +7,24 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:GraficaBarras">
-                    <Grid Background="{TemplateBinding Background}"
-                          BorderBrush="Black"
-                          BorderThickness="2">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
 
-                        <Line x:Name="ejeY"
-                              Stroke="Black"/>
-                        <Line x:Name="ejeX"
-                              Stroke="Black"/>
-                        <Canvas x:Name="canvas" 
-                                HorizontalAlignment="Center" 
-                                VerticalAlignment="Center"/>
-
+                        <Line x:Name="ejeY" Stroke="Black"/>
+                        <Line x:Name="ejeX" Stroke="Black"/>
+                        <Canvas x:Name="canvas" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        
+                        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="50, 0, 0, 0">
+                            <TextBlock x:Name="nombre" Text="Nombre" 
+                                       TextDecorations="Underline" FontWeight="Bold"/>
+                            <TextBlock x:Name="stock" Text="Stock"/>
+                            <TextBlock x:Name="pcompra" Text="Precio de Compra"/>
+                            <TextBlock x:Name="pventa" Text="Precio de Venta"/>
+                        </StackPanel>
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
