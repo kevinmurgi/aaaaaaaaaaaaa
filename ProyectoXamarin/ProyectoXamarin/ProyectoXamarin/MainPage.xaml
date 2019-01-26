@@ -22,7 +22,7 @@
                          BindingContext="{StaticResource listaItems}">
 
                 <!-- Lista con todos los items del menu, con su icono y su titulo -->
-                <ListView ItemsSource="{Binding Items ,Source={StaticResource listaItems}}"
+                <ListView ItemsSource="{Binding Items}"
                           SeparatorVisibility="Default"
                           ItemSelected="ListView_ItemSelected">
                     <ListView.ItemTemplate>
