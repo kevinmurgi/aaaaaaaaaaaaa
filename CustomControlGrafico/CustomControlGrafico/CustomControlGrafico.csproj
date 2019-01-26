@@ -109,6 +109,12 @@
     <None Include="CustomControlGrafico_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\discoduro.jpg" />
+    <Content Include="Assets\grafica.jpg" />
+    <Content Include="Assets\monitor.jpg" />
+    <Content Include="Assets\procesador.jpg" />
+    <Content Include="Assets\ram.jpg" />
+    <Content Include="Assets\regalo.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

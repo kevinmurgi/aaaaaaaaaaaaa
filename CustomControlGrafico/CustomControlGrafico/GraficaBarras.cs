@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Shapes;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
@@ -80,6 +81,8 @@ namespace CustomControlGrafico
         public GraficaBarras()
         {
             this.DefaultStyleKey = typeof(GraficaBarras);
+            this.GrosorEjes = 2;
+            this.ColorEjes = new SolidColorBrush(Colors.Black);
             this.ColorHayStock = new SolidColorBrush(Colors.LawnGreen);
             this.ColorFaltaStock = new SolidColorBrush(Colors.Red);
         }
@@ -91,16 +94,16 @@ namespace CustomControlGrafico
 
             // Establecemos como longitud y altura maximas el tamaño del grid
             // Si la altura es menor de 300, se pone en 300, menos no se veria nada
-            if (this.Height >= 300){
+            if (this.Height >= 300) {
                 this.alturaMaxima = this.Height - 100;
-            }else{
+            } else {
                 this.Height = 300;
                 this.alturaMaxima = this.Height - 100;
             }
             // Si la anchura es menor de 300, se pone en 300, menos no se veria nada
-            if (this.Width >= 300){
+            if (this.Width >= 300) {
                 this.longitudMaxima = this.Width;
-            }else{
+            } else {
                 this.Width = 300;
                 this.longitudMaxima = this.Width;
             }
@@ -138,7 +141,7 @@ namespace CustomControlGrafico
             TextBlock textoEjeY = new TextBlock();
             textoEjeY.Text = "Stock";
             miCanvas.Children.Add(textoEjeY);
-            Canvas.SetLeft(textoEjeY, -43);
+            Canvas.SetLeft(textoEjeY, - (40 + this.GrosorEjes));
 
             TextBlock textoEjeX = new TextBlock();
             textoEjeX.Text = "Productos";
@@ -149,13 +152,12 @@ namespace CustomControlGrafico
 
         private void establecerDimensiones()
         {
-            if (this.ItemsSource != null)
-            {
+            if (this.ItemsSource != null) {
                 // Recorre todos los productos recibidos por ItemsSource
                 int cantProductos = 0;
-                foreach (Producto p in this.ItemsSource){
+                foreach (Producto p in this.ItemsSource) {
                     // Almacena el stock maximo
-                    if (p.Stock > this.maxStock){
+                    if (p.Stock > this.maxStock) {
                         this.maxStock = p.Stock;
                     }
                     cantProductos++;
@@ -175,11 +177,12 @@ namespace CustomControlGrafico
             TextBlock stock = (TextBlock)GetTemplateChild("stock");
             TextBlock pcompra = (TextBlock)GetTemplateChild("pcompra");
             TextBlock pventa = (TextBlock)GetTemplateChild("pventa");
+            Image imagen = (Image)GetTemplateChild("imagen");
+            
 
-            foreach (Producto p in this.ItemsSource)
-            {
-                if (p.Nombre.Equals(rectangulo.Name))
-                {
+            foreach (Producto p in this.ItemsSource) {
+                if (p.Nombre.Equals(rectangulo.Name)) {
+                    imagen.Source = new BitmapImage(new Uri("ms-appx:///" + p.Imagen));
                     nombre.Text = p.Nombre;
                     stock.Text = p.Stock.ToString() + " unidades restantes";
                     pcompra.Text = "Compra: " + p.PrecioCompra.ToString() + "€";
@@ -190,37 +193,30 @@ namespace CustomControlGrafico
 
         private void crearBarras()
         {
-            if (this.ItemsSource != null)
-            {
+            if (this.ItemsSource != null) {
                 // Recorre todos los productos recibidos por el ItemsSources
                 int cantProductos = 0;
                 Storyboard storyboard = new Storyboard();
-                foreach (Producto p in this.ItemsSource)
-                {
+                foreach (Producto p in this.ItemsSource) {
                     // Por cada uno de ellos crea un rectangulo
                     var rectangulo = new Rectangle();
 
                     // Dependiendo del stock se pinta de un color y otro
-                    if (p.Stock >= 5)
-                    {
+                    if (p.Stock >= 5) {
                         rectangulo.Fill = this.ColorHayStock;
-                    }
-                    else
-                    {
+                    } else {
                         rectangulo.Fill = this.ColorFaltaStock;
                     }
 
                     // Le establecemos sus dimensiones
                     double ancho;
-                    if (this.anchuraPorProducto > 20)
-                    {
+                    if (this.anchuraPorProducto > 20) {
                         ancho = this.anchuraPorProducto - 20;
-                    }
-                    else
-                    {
+                    } else {
                         ancho = this.anchuraPorProducto - 1;
                     }
                     rectangulo.Height = this.tamañoPorStock * p.Stock;
+                    if (rectangulo.Height == 0) rectangulo.Height = 5;
 
                     // Le adjuntamos su evento
                     rectangulo.Name = p.Nombre;
@@ -242,13 +238,12 @@ namespace CustomControlGrafico
                     // Lo añadimos al Canvas y lo posicionamos
                     miCanvas.Children.Add(rectangulo);
                     Canvas.SetLeft(rectangulo, 20 + (cantProductos * this.anchuraPorProducto));
-                    Canvas.SetTop(rectangulo, this.alturaMaxima - (100 + (this.tamañoPorStock * p.Stock) + this.GrosorEjes));
+                    Canvas.SetTop(rectangulo, this.alturaMaxima - (100 + rectangulo.Height + this.GrosorEjes));
 
                     // Ponemos el nombre del producto encima de la barra
                     TextBlock nombre = new TextBlock();
                     int count = 1;
-                    foreach (char c in p.Nombre)
-                    {
+                    foreach (char c in p.Nombre) {
                         if (c == ' ') count++;
                     }
                     nombre.Text = p.Nombre.Replace(" ", "\n");
