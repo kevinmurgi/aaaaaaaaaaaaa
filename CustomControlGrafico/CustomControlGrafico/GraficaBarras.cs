@@ -197,10 +197,15 @@ namespace CustomControlGrafico
 
                     // Ponemos el nombre del producto encima de la barra
                     TextBlock nombre = new TextBlock();
-                    nombre.Text = p.Nombre;
+                    int count = 1;
+                    foreach (char c in p.Nombre){
+                        if (c == ' ') count++;
+                    }
+                    nombre.Text = p.Nombre.Replace(" ", "\n");
+
                     miCanvas.Children.Add(nombre);
                     Canvas.SetLeft(nombre, Canvas.GetLeft(rectangulo));
-                    Canvas.SetTop(nombre, Canvas.GetTop(rectangulo) - 20);
+                    Canvas.SetTop(nombre, Canvas.GetTop(rectangulo) - (count*20));
 
                     cantProductos++;
                 }
