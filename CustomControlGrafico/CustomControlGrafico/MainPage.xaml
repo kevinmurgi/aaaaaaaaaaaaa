@@ -8,9 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <local:GraficaBarras x:Name="grafica" Width="500" Height="500" 
+    <StackPanel>
+        <!-- Boton para comprobar el comportamiento al añadir un producto de forma rapida -->
+        <Button Content="Añadir Producto" Click="Button_Click" HorizontalAlignment="Center"/>
+        
+        <!-- Por defecto:
+            Width = Height = 300
+            ColorEjes = Black
+            GrosorEjes = 2
+            NivelStock = 5
+            ColorHayStock = LawnGreen 
+            ColorFaltaStock = Red -->
+        <local:GraficaBarras ItemsSource="{x:Bind productos}" 
+                             Width="450" Height="500" 
                              ColorEjes="Blue" GrosorEjes="3"
+                             NivelStock="5"
                              ColorHayStock="LawnGreen" ColorFaltaStock="Red"/>
-    </Grid>
+    </StackPanel>
 </Page>

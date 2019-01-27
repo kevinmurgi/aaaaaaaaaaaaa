@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,10 +23,15 @@ namespace CustomControlGrafico
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        ObservableCollection<Producto> productos = GestorProductos.getProductos();
         public MainPage()
         {
             this.InitializeComponent();
-            this.grafica.ItemsSource = GestorProductos.getProductos();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.productos.Add(new Producto() { Nombre = "Prueba", Stock = 6, PrecioCompra = 45.00, PrecioVenta = 299.99, Imagen = "Assets/regalo.jpg" });
         }
     }
 }

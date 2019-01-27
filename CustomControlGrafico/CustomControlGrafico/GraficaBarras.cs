@@ -48,6 +48,15 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty GrosorEjesProperty =
             DependencyProperty.Register("GrosorEjes", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
 
+        // Punto de stock en elq ue cambia de color
+        public int NivelStock
+        {
+            get { return (int)GetValue(NivelStockProperty); }
+            set { SetValue(NivelStockProperty, value); }
+        }
+        public static readonly DependencyProperty NivelStockProperty =
+            DependencyProperty.Register("NivelStock", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
+
         // Color de las barras si tienen 5+ stock *Por defecto en verde*
         public SolidColorBrush ColorHayStock
         {
@@ -80,11 +89,21 @@ namespace CustomControlGrafico
         // Constructor
         public GraficaBarras()
         {
+            // Se establecen los valores por defecto
             this.DefaultStyleKey = typeof(GraficaBarras);
             this.GrosorEjes = 2;
             this.ColorEjes = new SolidColorBrush(Colors.Black);
             this.ColorHayStock = new SolidColorBrush(Colors.LawnGreen);
             this.ColorFaltaStock = new SolidColorBrush(Colors.Red);
+            this.NivelStock = 5;
+        }
+
+        // Evento CollectionChanged para el ItemsSource que hace repintar los graficos
+        private void ItemsSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.generarLetreros();
+            this.establecerDimensiones();
+            this.crearBarras();
         }
 
         // Metodo OnApplyTemplate
@@ -92,6 +111,8 @@ namespace CustomControlGrafico
         {
             base.OnApplyTemplate();
 
+            // Le asignamos el evento al ItemsSource
+            this.ItemsSource.CollectionChanged += ItemsSource_CollectionChanged;
             // Establecemos como longitud y altura maximas el tamaño del grid
             // Si la altura es menor de 300, se pone en 300, menos no se veria nada
             if (this.Height >= 300) {
@@ -138,6 +159,8 @@ namespace CustomControlGrafico
 
         private void generarLetreros()
         {
+            miCanvas.Children.Clear();
+
             TextBlock textoEjeY = new TextBlock();
             textoEjeY.Text = "Stock";
             miCanvas.Children.Add(textoEjeY);
@@ -169,7 +192,7 @@ namespace CustomControlGrafico
             }
         }
 
-        // Evento de los ractangulos
+        // Evento de los ractangulos de la grafica
         private void MyRectangle_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Rectangle rectangulo = sender as Rectangle;
@@ -202,7 +225,7 @@ namespace CustomControlGrafico
                     var rectangulo = new Rectangle();
 
                     // Dependiendo del stock se pinta de un color y otro
-                    if (p.Stock >= 5) {
+                    if (p.Stock >= this.NivelStock) {
                         rectangulo.Fill = this.ColorHayStock;
                     } else {
                         rectangulo.Fill = this.ColorFaltaStock;
