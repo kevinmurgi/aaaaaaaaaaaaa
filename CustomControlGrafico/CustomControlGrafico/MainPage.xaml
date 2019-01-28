@@ -8,21 +8,42 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel>
-        <!-- Boton para comprobar el comportamiento al añadir un producto de forma rapida -->
-        <Button Content="Añadir Producto" Click="Button_Click" HorizontalAlignment="Center"/>
+    <ScrollViewer>
+        <Grid Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Formulario para añadir un nuevo producto
+            y comprobar el comportamiento del objeto al añadir un producto -->
+            <StackPanel Orientation="Vertical" 
+                        Width="300" 
+                        Height="450"
+                        Padding="10" 
+                        HorizontalAlignment="Center" 
+                        BorderThickness="2" BorderBrush="Black">
+                <TextBox x:Name="nombre" Header="Nombre"/>
+                <TextBox x:Name="stockActual" Header="Stock Actual"/>
+                <TextBox x:Name="stockMinimo" Header="Stock Minimo"/>
+                <TextBox x:Name="precioCompra" Header="Precio Compra"/>
+                <TextBox x:Name="precioVenta" Header="Precio Venta"/>
+                <TextBox x:Name="imagen" Header="Imagen" Text="Assets/regalo.jpg"/>
+                <Button Content="Añadir Producto" Click="Button_Click" HorizontalAlignment="Center" Margin="0, 5, 0, 0"/>
+            </StackPanel>
         
-        <!-- Por defecto:
-            Width = Height = 300
-            ColorEjes = Black
-            GrosorEjes = 2
-            NivelStock = 5
-            ColorHayStock = LawnGreen 
-            ColorFaltaStock = Red -->
-        <local:GraficaBarras ItemsSource="{x:Bind productos}" 
-                             Width="450" Height="500" 
-                             ColorEjes="Blue" GrosorEjes="3"
-                             NivelStock="5"
-                             ColorHayStock="LawnGreen" ColorFaltaStock="Red"/>
-    </StackPanel>
+            <!-- Por defecto:
+                Width = Height = 300
+                ColorEjes = Black
+                GrosorEjes = 2
+                NivelStock = 5
+                ColorHayStock = LawnGreen 
+                ColorFaltaStock = Red -->
+            <local:GraficaBarras Grid.Column="1" ItemsSource="{x:Bind productos}" 
+                                 Width="450" Height="500" 
+                                 ColorEjes="Blue" GrosorEjes="3"
+                                 ColorHayStock="LawnGreen" ColorFaltaStock="Red"/>
+        </Grid>
+    </ScrollViewer>
 </Page>

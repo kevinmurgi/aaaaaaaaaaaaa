@@ -10,7 +10,7 @@
                     <Grid Background="{TemplateBinding Background}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
-                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="115"/>
                         </Grid.RowDefinitions>
 
                         <Line x:Name="ejeY" Stroke="Black" StrokeThickness="1"/>
@@ -24,6 +24,7 @@
                                 <TextBlock x:Name="nombre" Text="Nombre" 
                                            TextDecorations="Underline" FontWeight="Bold"/>
                                 <TextBlock x:Name="stock" Text="Stock"/>
+                                <TextBlock x:Name="stockminimo" Text="Stock Minimo"/>
                                 <TextBlock x:Name="pcompra" Text="Precio de Compra"/>
                                 <TextBlock x:Name="pventa" Text="Precio de Venta"/>
                             </StackPanel>

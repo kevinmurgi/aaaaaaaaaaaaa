@@ -31,7 +31,14 @@ namespace CustomControlGrafico
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.productos.Add(new Producto() { Nombre = "Prueba", Stock = 6, PrecioCompra = 45.00, PrecioVenta = 299.99, Imagen = "Assets/regalo.jpg" });
+            this.productos.Add(new Producto() {
+                Nombre = nombre.Text.ToString(),
+                Stock = int.Parse(stockActual.Text.ToString()),
+                StockMinimo = int.Parse(stockMinimo.Text.ToString()),
+                PrecioCompra = int.Parse(precioCompra.Text.ToString()),
+                PrecioVenta = int.Parse(precioVenta.Text.ToString()),
+                Imagen = imagen.Text.ToString()
+            });
         }
     }
 }

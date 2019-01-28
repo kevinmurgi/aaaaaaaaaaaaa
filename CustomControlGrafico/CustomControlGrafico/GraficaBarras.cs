@@ -48,15 +48,6 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty GrosorEjesProperty =
             DependencyProperty.Register("GrosorEjes", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
 
-        // Punto de stock en elq ue cambia de color
-        public int NivelStock
-        {
-            get { return (int)GetValue(NivelStockProperty); }
-            set { SetValue(NivelStockProperty, value); }
-        }
-        public static readonly DependencyProperty NivelStockProperty =
-            DependencyProperty.Register("NivelStock", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
-
         // Color de las barras si tienen 5+ stock *Por defecto en verde*
         public SolidColorBrush ColorHayStock
         {
@@ -95,7 +86,6 @@ namespace CustomControlGrafico
             this.ColorEjes = new SolidColorBrush(Colors.Black);
             this.ColorHayStock = new SolidColorBrush(Colors.LawnGreen);
             this.ColorFaltaStock = new SolidColorBrush(Colors.Red);
-            this.NivelStock = 5;
         }
 
         // Evento CollectionChanged para el ItemsSource que hace repintar los graficos
@@ -116,10 +106,10 @@ namespace CustomControlGrafico
             // Establecemos como longitud y altura maximas el tamaño del grid
             // Si la altura es menor de 300, se pone en 300, menos no se veria nada
             if (this.Height >= 300) {
-                this.alturaMaxima = this.Height - 100;
+                this.alturaMaxima = this.Height - 115;
             } else {
                 this.Height = 300;
-                this.alturaMaxima = this.Height - 100;
+                this.alturaMaxima = this.Height - 115;
             }
             // Si la anchura es menor de 300, se pone en 300, menos no se veria nada
             if (this.Width >= 300) {
@@ -198,6 +188,7 @@ namespace CustomControlGrafico
             Rectangle rectangulo = sender as Rectangle;
             TextBlock nombre = (TextBlock)GetTemplateChild("nombre");
             TextBlock stock = (TextBlock)GetTemplateChild("stock");
+            TextBlock stockMin = (TextBlock)GetTemplateChild("stockminimo");
             TextBlock pcompra = (TextBlock)GetTemplateChild("pcompra");
             TextBlock pventa = (TextBlock)GetTemplateChild("pventa");
             Image imagen = (Image)GetTemplateChild("imagen");
@@ -208,6 +199,7 @@ namespace CustomControlGrafico
                     imagen.Source = new BitmapImage(new Uri("ms-appx:///" + p.Imagen));
                     nombre.Text = p.Nombre;
                     stock.Text = p.Stock.ToString() + " unidades restantes";
+                    stockMin.Text = p.StockMinimo.ToString() + " unidades requeridas";
                     pcompra.Text = "Compra: " + p.PrecioCompra.ToString() + "€";
                     pventa.Text = "Venta: " + p.PrecioVenta.ToString() + "€";
                 }
@@ -224,8 +216,8 @@ namespace CustomControlGrafico
                     // Por cada uno de ellos crea un rectangulo
                     var rectangulo = new Rectangle();
 
-                    // Dependiendo del stock se pinta de un color y otro
-                    if (p.Stock >= this.NivelStock) {
+                    // Dependiendo del stock minimo y el actual se pinta de un color u otro
+                    if (p.Stock >= p.StockMinimo) {
                         rectangulo.Fill = this.ColorHayStock;
                     } else {
                         rectangulo.Fill = this.ColorFaltaStock;
