@@ -51,6 +51,8 @@ namespace CustomControls2
 
             _canvas = (Canvas)GetTemplateChild("canvasTemplate");
             Ellipse sol = (Ellipse)GetTemplateChild("sol");
+            Storyboard sb = (Storyboard)GetTemplateChild("story");
+            //sb.Begin();
             sol.Width = sol.Height = this.MaxItemSize;
 
             if (_canvas != null)
@@ -78,8 +80,15 @@ namespace CustomControls2
                         this.diametroMaxItems = item.Diametro;
                     }
                 }
-                // Por ultimo realiza la relacion entre la distancia mas grande y el tamaño del Layout donde se encuentra el objeto
-                this.distanciaPorPixel = (this.Width / 2) / this.distanciaMaxItems;
+                if (this.Width <= this.Height)
+                {
+                    // Por ultimo realiza la relacion entre la distancia mas grande y el tamaño del Layout donde se encuentra el objeto
+                    this.distanciaPorPixel = (this.Width / 2) / this.distanciaMaxItems;
+                } else
+                {
+                    this.distanciaPorPixel = (this.Height / 2) / this.distanciaMaxItems;
+                }
+                
                 // Por ultimo realiza la relacion entre el diametro mas grande y el tamaño maximo del diametro
                 this.diametroMaxPorPixel = this.MaxItemSize / this.diametroMaxItems;
             }
@@ -90,6 +99,7 @@ namespace CustomControls2
             if (ItemsSource != null)
             {
                 _canvas.Children.Clear();
+                Storyboard storyboard = new Storyboard();
                 // Por cada planeta
                 foreach (var item in ItemsSource)
                 {
@@ -110,15 +120,24 @@ namespace CustomControls2
                     Canvas.SetLeft(element, -1*((item.DistanciaSol * this.distanciaPorPixel) - (item.Diametro/2)));
                     Canvas.SetTop(element, (element.Width/2) * -1);
 
-                    /*
-                    var title = new TextBlock();
-                    title.Text = item.Nombre;
-                    title.HorizontalAlignment = HorizontalAlignment.Center;
-                    _canvas.Children.Add(title);
-                    Canvas.SetLeft(title, (radioSol * -1) + (item.DistanciaSol * -1));
-                    Canvas.SetTop(title, ((item.Diametro/2) + 20) * -1);
-                    */
+                    // Animacion
+                    storyboard.RepeatBehavior = RepeatBehavior.Forever;
+                    DoubleAnimation da = new DoubleAnimation()
+                    {
+                        From = 0,
+                        To = 360,
+                        Duration = new Duration(TimeSpan.FromSeconds(5 * (((this.Width / 2) - (Canvas.GetLeft(element)))) / (this.Width / 2))),
+                        RepeatBehavior = RepeatBehavior.Forever
+                    };
+                    RotateTransform rotar = new RotateTransform();
+                    rotar.CenterX = -(Canvas.GetLeft(element));
+                    rotar.CenterY = -(Canvas.GetTop(element));
+                    element.RenderTransform = rotar;
+                    Storyboard.SetTarget(da, element);
+                    Storyboard.SetTargetProperty(da, "(UIElement.RenderTransform).(RotateTransform.Angle)");
+                    storyboard.Children.Add(da);
                 }
+                storyboard.Begin();
             }
         }
 

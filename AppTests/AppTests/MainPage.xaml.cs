@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // La plantilla de elemento Página en blanco está documentada en https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0xc0a
 
-namespace CustomControls2
+namespace AppTests
 {
     /// <summary>
     /// Página vacía que se puede usar de forma independiente o a la que se puede navegar dentro de un objeto Frame.
@@ -25,10 +25,6 @@ namespace CustomControls2
         public MainPage()
         {
             this.InitializeComponent();
-            //Visualizer.ItemsSource = GestorPlanetas.ObtenerPlanetas();
-            PressFormLogin.Begin();
-            PressFormLogin2.Begin();
-            PressFormLogin3.Begin();
         }
     }
 }

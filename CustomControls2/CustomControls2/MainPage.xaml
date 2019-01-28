@@ -8,12 +8,32 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Width="1000"
-          Height="500" >
+    <Page.Resources>
+        <Storyboard x:Name="PressFormLogin" Storyboard.TargetName="OuterEllipse" RepeatBehavior="Forever">
+            <ColorAnimation Storyboard.TargetProperty="(Ellipse.Fill).(SolidColorBrush.Color)" Duration="0:0:1" From="Aqua" To="Red" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetProperty="Width" From="259.0" To="149.0" Duration="0:0:4" EnableDependentAnimation="True" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetProperty="Height" From="259.0" To="149.0" Duration="0:0:4" EnableDependentAnimation="True" AutoReverse="True"/>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:4" EnableDependentAnimation="True" AutoReverse="True"/>
+        </Storyboard>
+        <Storyboard x:Name="PressFormLogin2" Storyboard.TargetName="txtAdios" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:4" EnableDependentAnimation="True" AutoReverse="True"/>
+        </Storyboard>
+        <Storyboard x:Name="PressFormLogin3" Storyboard.TargetName="txtHola" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="1.0" To="0.0" Duration="0:0:4" EnableDependentAnimation="True" AutoReverse="True"/>
+        </Storyboard>
+     </Page.Resources>
+
+    <Grid>
+        <TextBlock x:Name="txtAdios" Text="¡Adiós!" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0"/>
+        <TextBlock x:Name="txtHola" Text="¡Hola!" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="1"/>
+        <Ellipse x:Name="OuterEllipse"  Width="259" Height="259" Fill="Aqua"/>
+        <Line Stroke="Red" VerticalAlignment="Center" X1="400" X2="400" Y1="200"/>
+        <!--
         <local:SolarSystem x:Name="Visualizer" 
                            MaxItemSize="60" 
                            MinItemSize="20" 
-                           Height="300" 
+                           Height="600" 
                            Width="900"/>
+        -->
     </Grid>
 </Page>

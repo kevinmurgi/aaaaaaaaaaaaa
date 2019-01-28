@@ -7,8 +7,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:SolarSystem">
-                    <Grid Background="{TemplateBinding Background}"
-                          Margin="20" BorderBrush="Red" BorderThickness="2">
+                    <Grid Margin="20" 
+                          BorderBrush="Red" 
+                          BorderThickness="2" 
+                          Background="Black">
+
+                        <Grid.Resources>
+                            <Storyboard x:Name="story" RepeatBehavior="Forever">
+                                <DoubleAnimation RepeatBehavior="Forever"
+                                                 Duration="0:0:3"
+                                                 To="200"
+                                                 Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                 Storyboard.TargetName="sol"
+                                                 />
+                            </Storyboard>
+                        </Grid.Resources>
+                        
                         <Canvas x:Name="canvasTemplate" 
                                 HorizontalAlignment="Center" 
                                 VerticalAlignment="Center"/>
