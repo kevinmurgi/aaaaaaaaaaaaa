@@ -7,18 +7,60 @@ using System.Threading.Tasks;
 
 namespace CustomControlGrafico
 {
+    /// <summary>
+    /// Clase Producto. Establece la estructura de los objetos que se mostrarán en el gráfico.
+    /// </summary>
     public class Producto
     {
+        /// <summary>
+        /// Atributo Nombre (string).
+        /// Hace referencia al nombre del producto.
+        /// </summary>
         public string Nombre { get; set; }
+
+        /// <summary>
+        /// Atributo Stock (int)
+        /// Hace referencia a la cantidad de stock actual que tiene el producto.
+        /// </summary>
         public int Stock { get; set; }
+
+        /// <summary>
+        /// Atributo StockMinimo (int)
+        /// Hace referencia al Stock mínimo de este producto que debe haber en almacén.
+        /// </summary>
         public int StockMinimo { get; set; }
+
+        /// <summary>
+        /// Atributo PrecioCompra
+        /// Hace referencia al precio de compra del producto (a proveedores).
+        /// </summary>
+        /// <value>double</value>
         public double PrecioCompra { get; set; }
+
+        /// <summary>
+        /// Atributo PrecioVenta (double)
+        /// Hace referencia al precio de venta del producto (a clientes).
+        /// </summary>
         public double PrecioVenta { get; set; }
+
+        /// <summary>
+        /// Atributo Imagen (String)
+        /// Es la ruta de la imagen del producto que se mostrará a través de UI.
+        /// </summary>
         public String Imagen { get; set; }
     }
 
+    /// <summary>
+    /// Clase GestorProductos.
+    /// Permite obtener una lista con productos para utilizar.
+    /// </summary>
     public class GestorProductos
     {
+        /// <summary>
+        /// Método estático getProductos().
+        /// Permite obtener una lista de productos.
+        /// </summary>
+        /// <returns>Colección observable de Productos</returns>
         public static ObservableCollection<Producto> getProductos()
         {
             return new ObservableCollection<Producto> {
