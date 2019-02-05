@@ -18,19 +18,82 @@ using Windows.UI.Xaml.Shapes;
 
 namespace CustomControlGrafico
 {
+    /// <summary>
+    /// Clase GraficaBarras
+    /// Componente gráfico que muestra un gráfico de barras con una serie de productos, 
+    /// de lo cuales se puede ver su cantidad de stock y si hay poca/mucha cantidad en almacén.
+    /// </summary>
+    /// <see cref="Producto"/>
     public sealed class GraficaBarras : Control
     {
         // Atributos
+        /// <summary>
+        /// Atributo longitudMaxima
+        /// Define la longitud máxima que puede adquirir el componente dependiendo del espacio que tenga disponible.
+        /// </summary>
+        /// <value>double</value>
         private double longitudMaxima;
+
+        /// <summary>
+        /// Atributo alturaMaxima
+        /// Define la altura máxima que puede adquirir el componente dependiendo del espacio que tenga disponible.
+        /// </summary>
+        /// <value>double</value>
         private double alturaMaxima;
+
+        /// <summary>
+        /// Atributo ejeX
+        /// Hace referencia a la línea que representa el eje X en el gráfico.
+        /// </summary>
+        /// <value>Line</value>
         private Line ejeX;
+
+        /// <summary>
+        /// Atributo ejeY
+        /// Hace referencia a la línea que representa el eje Y en el gráfico.
+        /// </summary>
+        /// <value>Line</value>
         private Line ejeY;
+
+        /// <summary>
+        /// Atributo miCanvas
+        /// Hace referencia al canvas que sobre el que se dibujará el gráfico.
+        /// </summary>
+        /// <value>Canvas</value>
         Canvas miCanvas;
+
+        /// <summary>
+        /// Atributo maxStock
+        /// Contiene el valor de stock actual más alto de entre todos los productos, 
+        /// para establecer esa cantidad más grande el punto límite en el gráfico y
+        /// el resto dividir en base a ella.
+        /// </summary>
+        /// <value>int</value>
         private int maxStock = 0;
+
+        /// <summary>
+        /// Atributo tamañoPorStock
+        /// Utilizando las variables <see cref="maxStock"/> y <seealso cref="alturaMaxima"/>, 
+        /// se establece por cada unidad de stock
+        /// cuanta altura debe tener una barra dentro del gráfico.
+        /// </summary>
+        /// <value>double</value>
         private double tamañoPorStock;
+
+        /// <summary>
+        /// Atributo anchuraPorProducto
+        /// Utilizando la variable <see cref="longitudMaxima"/> y la cantidad de poductos que forma el gráfico, 
+        /// se establece por cada producto cuanta anchura debe tener dentro del gráfico.
+        /// </summary>
+        /// <value>double</value>
         private double anchuraPorProducto;
 
-        // Color de los ejes X e Y
+        /// <summary>
+        /// Propiedad dependiente ColorEjes
+        /// Define el color que van a tomar los ejes del gráfico.
+        /// Por defecto en negro.
+        /// </summary>
+        /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorEjes
         {
             get { return (SolidColorBrush)GetValue(ColorEjesProperty); }
@@ -39,7 +102,12 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty ColorEjesProperty =
             DependencyProperty.Register("ColorEjes", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
-        // Grosor de los ejes X e Y
+        /// <summary>
+        /// Propiedad dependiente GrosorEjes
+        /// Define el grosor que van a tomar los ejes del gráfico.
+        /// Por defecto en 2.
+        /// </summary>
+        /// <value>int</value>
         public int GrosorEjes
         {
             get { return (int)GetValue(GrosorEjesProperty); }
@@ -48,7 +116,12 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty GrosorEjesProperty =
             DependencyProperty.Register("GrosorEjes", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
 
-        // Color de las barras si tienen 5+ stock *Por defecto en verde*
+        /// <summary>
+        /// Propiedad dependiente ColorHayStock
+        /// Define el color de los productos que tengan el suficiente stock en almacen.
+        /// Por defecto en verde.
+        /// </summary>
+        /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorHayStock
         {
             get { return (SolidColorBrush)GetValue(ColorHayStockProperty); }
@@ -57,7 +130,12 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty ColorHayStockProperty =
             DependencyProperty.Register("ColorHayStock", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
-        // Color de las barras si tienen -5 stock *Por defecto en rojo*
+        /// <summary>
+        /// Propiedad dependiente ColorFaltaStock
+        /// Define el color de los productos que no tengan el stock requerido en almacen.
+        /// Por defecto en rojo.
+        /// </summary>
+        /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorFaltaStock
         {
             get { return (SolidColorBrush)GetValue(ColorFaltaStockProperty); }
@@ -66,7 +144,11 @@ namespace CustomControlGrafico
         public static readonly DependencyProperty ColorFaltaStockProperty =
             DependencyProperty.Register("ColorFaltaStock", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
-        // ItemsSource
+        /// <summary>
+        /// Propiedad dependiente ItemsSource
+        /// Contiene una lista con los productos que se van a mostrar en el gráfico.
+        /// </summary>
+        /// <value>ObservableCollection<see cref="Producto"/></value>
         public ObservableCollection<Producto> ItemsSource
         {
             get { return (ObservableCollection<Producto>)GetValue(ItemsSourceProperty); }
@@ -77,7 +159,10 @@ namespace CustomControlGrafico
 
 
 
-        // Constructor
+        /// <summary>
+        /// Constructor por defecto (y único) de la clase <see cref="GraficaBarras"/>.
+        /// Establece todos los valores por defecto del componente (gráfico).
+        /// </summary>
         public GraficaBarras()
         {
             // Se establecen los valores por defecto
@@ -87,8 +172,14 @@ namespace CustomControlGrafico
             this.ColorHayStock = new SolidColorBrush(Colors.LawnGreen);
             this.ColorFaltaStock = new SolidColorBrush(Colors.Red);
         }
-
-        // Evento CollectionChanged para el ItemsSource que hace repintar los graficos
+        
+        /// <summary>
+        /// Evento CollectionChanged asociado a la propiedad dependiente <see cref="ItemsSource"/>
+        /// que, al añadirse o cambiarse algun objeto de la lista, se repinta el gráfico 
+        /// recalculando las dimensiones del mismo.
+        /// </summary>
+        /// <param name="sender">Objeto con el que se lanza el evento</param>
+        /// <param name="e">Argumentos del evento</param>
         private void ItemsSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             this.generarLetreros();
@@ -97,6 +188,11 @@ namespace CustomControlGrafico
         }
 
         // Metodo OnApplyTemplate
+        /// <summary>
+        /// Método OnApplyTemplate
+        /// Es llamado cuando se aplica/crea la plantilla gráfica del componente, aquí es donde
+        /// se establecen las dimensiones y se pinta el gráfico.
+        /// </summary>
         protected override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -134,6 +230,10 @@ namespace CustomControlGrafico
             crearBarras();
         }
 
+        /// <summary>
+        /// Método generarEjes
+        /// Genera los ejes X e Y dl gráfico y los posiciona dentro del Canvas <see cref="miCanvas"/>.
+        /// </summary>
         private void generarEjes()
         {
             // Le ponemos el color que nos indica el usuario (por defecto negro)
@@ -147,6 +247,11 @@ namespace CustomControlGrafico
             this.ejeY.StrokeThickness = this.ejeX.StrokeThickness = this.GrosorEjes;
         }
 
+        /// <summary>
+        /// Método generarLetreros
+        /// Genera 2 letreros de tipo <see cref="TextBlock"/> con el contenido Productos y Stock,
+        /// y se posiciona al lado de los ejes X e Y respectivamente
+        /// </summary>
         private void generarLetreros()
         {
             miCanvas.Children.Clear();
@@ -163,6 +268,11 @@ namespace CustomControlGrafico
             Canvas.SetTop(textoEjeX, this.alturaMaxima - 100);
         }
 
+        /// <summary>
+        /// Método establecerDimensiones
+        /// Calcula todas las dimensiones máximas dentro del gráfico para poder adaptar
+        /// todos los productos a ellas.
+        /// </summary>
         private void establecerDimensiones()
         {
             if (this.ItemsSource != null) {
@@ -182,7 +292,12 @@ namespace CustomControlGrafico
             }
         }
 
-        // Evento de los ractangulos de la grafica
+        /// <summary>
+        /// Evento Tapped asociado a todos los Rectángulos (barras del gráfico).
+        /// Rellena los campos con los datos del producto seleccionado.
+        /// </summary>
+        /// <param name="sender">Objeto con el que se ha lanzado el evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void MyRectangle_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Rectangle rectangulo = sender as Rectangle;
@@ -206,6 +321,12 @@ namespace CustomControlGrafico
             }
         }
 
+        /// <summary>
+        /// Método crearBarras
+        /// Genera tantos rectángulos como productos haya en el <see cref="ItemsSource"/>, y los dimensiona
+        /// y posiciona según los datos obtenidos en <seealso cref="establecerDimensiones"/>.
+        /// Además, les establece una animación que los hace "pintarse" de izquierda a derecha.
+        /// </summary>
         private void crearBarras()
         {
             if (this.ItemsSource != null) {

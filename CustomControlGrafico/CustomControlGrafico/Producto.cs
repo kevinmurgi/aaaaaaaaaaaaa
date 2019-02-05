@@ -13,21 +13,24 @@ namespace CustomControlGrafico
     public class Producto
     {
         /// <summary>
-        /// Atributo Nombre (string).
+        /// Atributo Nombre
         /// Hace referencia al nombre del producto.
         /// </summary>
+        /// <value>string</value>
         public string Nombre { get; set; }
 
         /// <summary>
-        /// Atributo Stock (int)
+        /// Atributo Stock
         /// Hace referencia a la cantidad de stock actual que tiene el producto.
         /// </summary>
+        /// <value>int</value>
         public int Stock { get; set; }
 
         /// <summary>
-        /// Atributo StockMinimo (int)
+        /// Atributo StockMinimo
         /// Hace referencia al Stock mínimo de este producto que debe haber en almacén.
         /// </summary>
+        /// <value>int</value>
         public int StockMinimo { get; set; }
 
         /// <summary>
@@ -38,15 +41,17 @@ namespace CustomControlGrafico
         public double PrecioCompra { get; set; }
 
         /// <summary>
-        /// Atributo PrecioVenta (double)
+        /// Atributo PrecioVenta
         /// Hace referencia al precio de venta del producto (a clientes).
         /// </summary>
+        /// <value>double</value>
         public double PrecioVenta { get; set; }
 
         /// <summary>
-        /// Atributo Imagen (String)
+        /// Atributo Imagen
         /// Es la ruta de la imagen del producto que se mostrará a través de UI.
         /// </summary>
+        /// <value>String</value>
         public String Imagen { get; set; }
     }
 
@@ -54,13 +59,14 @@ namespace CustomControlGrafico
     /// Clase GestorProductos.
     /// Permite obtener una lista con productos para utilizar.
     /// </summary>
+    /// <see cref="Producto">
     public class GestorProductos
     {
         /// <summary>
         /// Método estático getProductos().
         /// Permite obtener una lista de productos.
         /// </summary>
-        /// <returns>Colección observable de Productos</returns>
+        /// <returns>ObservableCollection<see cref="Producto"/></returns>
         public static ObservableCollection<Producto> getProductos()
         {
             return new ObservableCollection<Producto> {
