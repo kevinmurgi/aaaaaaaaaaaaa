@@ -38,13 +38,6 @@ namespace JsonPosts
             listaPosts.ItemsSource = datos2;
         }
 
-        private async void listaPosts_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Post post = sender as Post;
-            List<Comment> comentarios = await PostsProxy.getComments(post.id);
-            listaComentarios.ItemsSource = comentarios;
-        }
-
         private async void listaPosts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             List<Comment> comentarios = await PostsProxy.getComments(seleciconado.id);

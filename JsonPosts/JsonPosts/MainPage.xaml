@@ -18,7 +18,7 @@
 
         <Button Content="Posts" Click="Button_Click" Background="Red" Grid.Row="0"/>
 
-        <ListView x:Name="listaPosts" Grid.Row="1" ItemClick="listaPosts_ItemClick" SelectionChanged="listaPosts_SelectionChanged" SelectedItem="{x:Bind seleciconado, Mode=TwoWay}">
+        <ListView x:Name="listaPosts" Grid.Row="1" SelectionChanged="listaPosts_SelectionChanged" SelectedItem="{x:Bind seleciconado, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="objetos:Post">
                     <StackPanel Orientation="Vertical" BorderBrush="Black" Padding="5">
