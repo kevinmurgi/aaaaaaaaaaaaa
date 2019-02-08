@@ -19,51 +19,61 @@ using Windows.UI.Xaml.Shapes;
 namespace CustomControlGrafico
 {
     /// <summary>
-    /// Clase GraficaBarras
-    /// Componente gráfico que muestra un gráfico de barras con una serie de productos, 
-    /// de lo cuales se puede ver su cantidad de stock y si hay poca/mucha cantidad en almacén.
+    /// Clase <see cref="GraficaBarras"/>.
+    /// Componente gráfico que muestra un gráfico de barras con una serie de <seealso cref="Producto"/>, 
+    /// de los cuales se puede ver su cantidad de stock y si hay poca/mucha cantidad en almacén.
+    /// 
+    /// El ejemplo siguiente muestra como crear un <see cref="GraficaBarras"/> y establecer sus propiedades mediante uso de codigo.
+    /// <code>
+    /// // Añadir un grafico de barras
+    /// GraficaBarras gb = new GraficaBarras();
+    /// gb.GrosorEjes = 2;
+    /// gb.ColorHayStock = new SolidColorBrush(Colors.Yellow);
+    /// gb.ColorFaltaStock = new SolidColorBrush(Colors.Red);
+    /// gb.ItemsSource = GestorProductos.getProductos();
+    /// </code>
     /// </summary>
     /// <see cref="Producto"/>
     public sealed class GraficaBarras : Control
     {
         // Atributos
         /// <summary>
-        /// Atributo longitudMaxima
+        /// Atributo longitudMaxima.
         /// Define la longitud máxima que puede adquirir el componente dependiendo del espacio que tenga disponible.
         /// </summary>
         /// <value>double</value>
         private double longitudMaxima;
 
         /// <summary>
-        /// Atributo alturaMaxima
+        /// Atributo alturaMaxima.
         /// Define la altura máxima que puede adquirir el componente dependiendo del espacio que tenga disponible.
         /// </summary>
         /// <value>double</value>
         private double alturaMaxima;
 
         /// <summary>
-        /// Atributo ejeX
+        /// Atributo ejeX.
         /// Hace referencia a la línea que representa el eje X en el gráfico.
         /// </summary>
         /// <value>Line</value>
         private Line ejeX;
 
         /// <summary>
-        /// Atributo ejeY
+        /// Atributo ejeY.
         /// Hace referencia a la línea que representa el eje Y en el gráfico.
         /// </summary>
         /// <value>Line</value>
         private Line ejeY;
 
         /// <summary>
-        /// Atributo miCanvas
+        /// Atributo miCanvas.
         /// Hace referencia al canvas que sobre el que se dibujará el gráfico.
         /// </summary>
         /// <value>Canvas</value>
         Canvas miCanvas;
 
         /// <summary>
-        /// Atributo maxStock
+        /// Atributo maxStock.
         /// Contiene el valor de stock actual más alto de entre todos los productos, 
         /// para establecer esa cantidad más grande el punto límite en el gráfico y
         /// el resto dividir en base a ella.
@@ -72,7 +82,7 @@ namespace CustomControlGrafico
         private int maxStock = 0;
 
         /// <summary>
-        /// Atributo tamañoPorStock
+        /// Atributo tamañoPorStock.
         /// Utilizando las variables <see cref="maxStock"/> y <seealso cref="alturaMaxima"/>, 
         /// se establece por cada unidad de stock
         /// cuanta altura debe tener una barra dentro del gráfico.
@@ -81,7 +91,7 @@ namespace CustomControlGrafico
         private double tamañoPorStock;
 
         /// <summary>
-        /// Atributo anchuraPorProducto
+        /// Atributo anchuraPorProducto.
         /// Utilizando la variable <see cref="longitudMaxima"/> y la cantidad de poductos que forma el gráfico, 
         /// se establece por cada producto cuanta anchura debe tener dentro del gráfico.
         /// </summary>
@@ -89,9 +99,9 @@ namespace CustomControlGrafico
         private double anchuraPorProducto;
 
         /// <summary>
-        /// Propiedad dependiente ColorEjes
-        /// Define el color que van a tomar los ejes del gráfico.
-        /// Por defecto en negro.
+        /// Propiedad dependiente ColorEjes.
+        /// Define el color que van a tomar los ejes de <see cref="GraficaBarras"/>.
+        /// Por defecto en <seealso cref="Colors.Black"/>.
         /// </summary>
         /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorEjes
@@ -99,12 +109,15 @@ namespace CustomControlGrafico
             get { return (SolidColorBrush)GetValue(ColorEjesProperty); }
             set { SetValue(ColorEjesProperty, value); }
         }
+        /// <summary>
+        /// Ver atributo <see cref="ColorEjes"/>.
+        /// </summary>
         public static readonly DependencyProperty ColorEjesProperty =
             DependencyProperty.Register("ColorEjes", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
         /// <summary>
-        /// Propiedad dependiente GrosorEjes
-        /// Define el grosor que van a tomar los ejes del gráfico.
+        /// Propiedad dependiente GrosorEjes.
+        /// Define el grosor que van a tomar los ejes de <see cref="GraficaBarras"/>.
         /// Por defecto en 2.
         /// </summary>
         /// <value>int</value>
@@ -113,13 +126,16 @@ namespace CustomControlGrafico
             get { return (int)GetValue(GrosorEjesProperty); }
             set { SetValue(GrosorEjesProperty, value); }
         }
+        /// <summary>
+        /// Ver atributo <see cref="GrosorEjes"/>.
+        /// </summary>
         public static readonly DependencyProperty GrosorEjesProperty =
             DependencyProperty.Register("GrosorEjes", typeof(int), typeof(GraficaBarras), new PropertyMetadata(null));
 
         /// <summary>
-        /// Propiedad dependiente ColorHayStock
-        /// Define el color de los productos que tengan el suficiente stock en almacen.
-        /// Por defecto en verde.
+        /// Propiedad dependiente ColorHayStock.
+        /// Define el color de los <see cref="Producto"/>s que tengan el suficiente stock en almacen.
+        /// Por defecto en <seealso cref="Colors.Green"/>.
         /// </summary>
         /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorHayStock
@@ -127,13 +143,16 @@ namespace CustomControlGrafico
             get { return (SolidColorBrush)GetValue(ColorHayStockProperty); }
             set { SetValue(ColorHayStockProperty, value); }
         }
+        /// <summary>
+        /// Ver atributo <see cref="ColorHayStock"/>.
+        /// </summary>
         public static readonly DependencyProperty ColorHayStockProperty =
             DependencyProperty.Register("ColorHayStock", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
         /// <summary>
-        /// Propiedad dependiente ColorFaltaStock
-        /// Define el color de los productos que no tengan el stock requerido en almacen.
-        /// Por defecto en rojo.
+        /// Propiedad dependiente ColorFaltaStock.
+        /// Define el color de los <see cref="Producto"/>s que no tengan el stock requerido en almacen.
+        /// Por defecto en <seealso cref="Colors.Red"/>.
         /// </summary>
         /// <value>SolidColorBrush</value>
         public SolidColorBrush ColorFaltaStock
@@ -141,27 +160,32 @@ namespace CustomControlGrafico
             get { return (SolidColorBrush)GetValue(ColorFaltaStockProperty); }
             set { SetValue(ColorFaltaStockProperty, value); }
         }
+        /// <summary>
+        /// Ver atributo <see cref="ColorFaltaStock"/>.
+        /// </summary>
         public static readonly DependencyProperty ColorFaltaStockProperty =
             DependencyProperty.Register("ColorFaltaStock", typeof(SolidColorBrush), typeof(GraficaBarras), new PropertyMetadata(null));
 
         /// <summary>
-        /// Propiedad dependiente ItemsSource
-        /// Contiene una lista con los productos que se van a mostrar en el gráfico.
+        /// Propiedad dependiente ItemsSource.
+        /// Contiene una lista con los <see cref="Producto"/>s que se van a mostrar en el <seealso cref="GraficaBarras"/>.
         /// </summary>
-        /// <value>ObservableCollection<see cref="Producto"/></value>
+        /// <value><see cref="ObservableCollection{Producto}"/></value>
         public ObservableCollection<Producto> ItemsSource
         {
             get { return (ObservableCollection<Producto>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
+        /// <summary>
+        /// Ver atributo <see cref="ItemsSource"/>.
+        /// </summary>
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(ObservableCollection<Producto>), typeof(GraficaBarras), new PropertyMetadata(null));
 
 
 
         /// <summary>
-        /// Constructor por defecto (y único) de la clase <see cref="GraficaBarras"/>.
-        /// Establece todos los valores por defecto del componente (gráfico).
+        /// Inicializa una nueva instancia de <see cref="GraficaBarras"/> y establece todos los valores por defecto del componente.
         /// </summary>
         public GraficaBarras()
         {
@@ -186,11 +210,10 @@ namespace CustomControlGrafico
             this.establecerDimensiones();
             this.crearBarras();
         }
-
-        // Metodo OnApplyTemplate
+        
         /// <summary>
         /// Método OnApplyTemplate
-        /// Es llamado cuando se aplica/crea la plantilla gráfica del componente, aquí es donde
+        /// Es llamado cuando se aplica/crea la plantilla gráfica del <see cref="GraficaBarras"/>, aquí es donde
         /// se establecen las dimensiones y se pinta el gráfico.
         /// </summary>
         protected override void OnApplyTemplate()

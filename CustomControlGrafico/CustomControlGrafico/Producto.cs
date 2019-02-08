@@ -13,42 +13,42 @@ namespace CustomControlGrafico
     public class Producto
     {
         /// <summary>
-        /// Atributo Nombre
+        /// Atributo Nombre.
         /// Hace referencia al nombre del producto.
         /// </summary>
         /// <value>string</value>
         public string Nombre { get; set; }
 
         /// <summary>
-        /// Atributo Stock
+        /// Atributo Stock.
         /// Hace referencia a la cantidad de stock actual que tiene el producto.
         /// </summary>
         /// <value>int</value>
         public int Stock { get; set; }
 
         /// <summary>
-        /// Atributo StockMinimo
+        /// Atributo StockMinimo.
         /// Hace referencia al Stock mínimo de este producto que debe haber en almacén.
         /// </summary>
         /// <value>int</value>
         public int StockMinimo { get; set; }
 
         /// <summary>
-        /// Atributo PrecioCompra
+        /// Atributo PrecioCompra.
         /// Hace referencia al precio de compra del producto (a proveedores).
         /// </summary>
         /// <value>double</value>
         public double PrecioCompra { get; set; }
 
         /// <summary>
-        /// Atributo PrecioVenta
+        /// Atributo PrecioVenta.
         /// Hace referencia al precio de venta del producto (a clientes).
         /// </summary>
         /// <value>double</value>
         public double PrecioVenta { get; set; }
 
         /// <summary>
-        /// Atributo Imagen
+        /// Atributo Imagen.
         /// Es la ruta de la imagen del producto que se mostrará a través de UI.
         /// </summary>
         /// <value>String</value>
@@ -57,9 +57,7 @@ namespace CustomControlGrafico
 
     /// <summary>
     /// Clase GestorProductos.
-    /// Permite obtener una lista con productos para utilizar.
     /// </summary>
-    /// <see cref="Producto">
     public class GestorProductos
     {
         /// <summary>

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
+    /// <summary>
+    /// Clasesita
+    /// </summary>
     public class Class1
     {
     }
