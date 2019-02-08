@@ -5,10 +5,43 @@
     xmlns:local="using:JsonPosts"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:objetos="using:JsonPosts.Objetos"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
 
+        <Button Content="Posts" Click="Button_Click" Background="Red" Grid.Row="0"/>
+
+        <ListView x:Name="listaPosts" Grid.Row="1" ItemClick="listaPosts_ItemClick" SelectionChanged="listaPosts_SelectionChanged" SelectedItem="{x:Bind seleciconado, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="objetos:Post">
+                    <StackPanel Orientation="Vertical" BorderBrush="Black" Padding="5">
+                        <TextBlock Text="{Binding title}" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                        <TextBlock Text="{Binding body}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView x:Name="listaComentarios" Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="objetos:Comment">
+                    <StackPanel Orientation="Vertical" BorderBrush="Blue">
+                        <TextBlock Text="{Binding name}"/>
+                        <TextBlock Text="{Binding email}"/>
+                        <TextBlock Text="{Binding body}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+        
     </Grid>
 </Page>
