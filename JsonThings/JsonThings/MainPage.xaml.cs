@@ -28,19 +28,46 @@ namespace JsonThings
         public MainPage()
         {
             this.InitializeComponent();
-            getData();
+            getPostsData();
         }
 
-        private async void getData()
+        /**
+         * Metodo que recoge todos los objetos Post de la API
+         * en json-server haciendo uso de la clase JsonData.cs
+         */
+        private async void getPostsData()
         {
             posts = await JsonData.GetPosts();
             listaDatos.ItemsSource = posts;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /**
+         * Evento del boton de borrado que borra el objeto Post
+         * seleccionado de la lista y, en caso de que se borre 
+         * de forma satisfactorio, actualiza la lista de Post.
+         * Todo esto haciendo uso dela clase JsonData.
+         */
+        private async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            Post actualPost = (Post)listaDatos.SelectedItem;
-            // No funciona
+            Post seleccionado = (Post) listaDatos.SelectedItem;
+            String res = await JsonData.DeletePost(seleccionado.id);
+
+            if (res.ToLower().Equals("ok"))
+            {
+                getPostsData();
+            }
+        }
+
+        /**
+         * 
+         */
+        private void Edit_Click(object sender, RoutedEventArgs e)
+        {
+            Post np = new Post();
+            np.id = 99;
+            np.author = "yo";
+            np.title = "titulito";
+            JsonData.PostPost(np);
         }
     }
 }

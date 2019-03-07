@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,33 @@ namespace JsonThings.Data
 
             // Devolvemos el objeto obtenido
             return datos;
+        }
+
+        public async static Task<String> DeletePost(int idPost)
+        {
+            // Intancia de un objeto HttpClient
+            HttpClient http = new HttpClient();
+
+            // Borramos el post seleccionado
+            HttpResponseMessage respuesta = await http.DeleteAsync("http://localhost:3000/posts/" + idPost);
+
+            // Recogemos ese resultado como un String
+            return respuesta.StatusCode.ToString();
+        }
+
+        public async static void PostPost(Post item)
+        {
+            HttpClient http = new HttpClient();
+
+            var values = new Dictionary<string, object>
+                {
+                    {"id", item.id},
+                    { "title", item.title},
+                    { "author", item.author}
+                };
+
+            
+            var respuesta = await http.PostAsJsonAsync("http://localhost:3000/posts/", values);
         }
     }
 }

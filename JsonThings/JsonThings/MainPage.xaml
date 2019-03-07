@@ -12,7 +12,7 @@
     <StackPanel Orientation="Vertical" Margin="8">
         
         <!-- Titulo -->
-        <TextBlock Text="Lista de Posts" 
+        <TextBlock Text="Lista de Posts" x:Name="tit"
                    Style="{StaticResource HeaderTextBlockStyle}"
                    TextDecorations="Underline"/>
 
@@ -21,25 +21,24 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="models:Post">
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <StackPanel Orientation="Vertical" Margin="8" Grid.Column="0">
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="8">
                             <TextBlock Text="{Binding title}" 
                                        Style="{StaticResource TitleTextBlockStyle}"/>
                             <TextBlock Text="{Binding author}"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Grid.Column="1">
-                            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74D;" Click="Button_Click"/>
-                            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE76D;"/>
-                        </StackPanel>
-                    </Grid>
-                    
+                    </StackPanel>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <StackPanel Orientation="Horizontal" Padding="4">
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE74D;"
+                    Click="Delete_Click" />
+            <Button FontFamily="Segoe MDL2 Assets" Content="&#xE76D;" 
+                    Click="Edit_Click"/>
+        </StackPanel>
+        
     </StackPanel>
 </Page>
